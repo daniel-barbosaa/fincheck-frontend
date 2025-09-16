@@ -1,0 +1,39 @@
+name: Linting Testes
+
+# Aqui indica quando deve executar, no caso quando houver (push ou PR) nessa lista de branches
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+# O trabalho que deve ser executado
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+          cache: "yarn"
+
+      # Essas partes são para executar o que a gente quiser
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Prettier
+        run: yarn lint:prettier:check
+
+      - name: Linting
+        run: yarn lint:eslint:check
+
+      - name: Typechecking
+        run: yarn typecheck
+
+      - name: Teste
+        run: yarn test:ci

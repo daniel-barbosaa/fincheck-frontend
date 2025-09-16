@@ -21,16 +21,16 @@ export function AuthForm({
 }: AuthFormProps) {
   return (
     <div>
-      <header className=" flex flex-col items-center gap-y-4">
-        <h1 className="text-2xl font-bold text-gray-900 tracking-[-1px]">
+      <header className="flex flex-col items-center gap-y-4">
+        <h1 className="text-2xl font-bold tracking-[-1px] text-gray-900">
           {title}
         </h1>
 
         <p className="space-x-2">
-          <span className="text-gray-700 tracking-[-0.5px]">{subtitle}</span>
+          <span className="tracking-[-0.5px] text-gray-700">{subtitle}</span>
           <Link
             to={linkTo}
-            className="text-teal-900 font-medium tracking-[-0.5px]"
+            className="font-medium tracking-[-0.5px] text-teal-900"
           >
             {linkText}
           </Link>
