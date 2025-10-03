@@ -9,6 +9,7 @@ interface AuthFormProps {
   linkTo: string;
   buttonText: string;
   children: React.ReactNode;
+  onSubmit: () => void;
 }
 
 export function AuthForm({
@@ -18,6 +19,7 @@ export function AuthForm({
   linkTo,
   buttonText,
   children,
+  onSubmit,
 }: AuthFormProps) {
   return (
     <div>
@@ -37,7 +39,7 @@ export function AuthForm({
         </p>
       </header>
 
-      <form action="" className="mt-[60px] flex flex-col gap-y-4">
+      <form onSubmit={onSubmit} className="mt-[60px] flex flex-col gap-y-4">
         {children}
 
         <Button type="submit" className="mt-2">
