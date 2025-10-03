@@ -9,7 +9,7 @@ interface AuthFormProps {
   linkTo: string;
   buttonText: string;
   children: React.ReactNode;
-  onSubmit: () => void;
+  onSubmit?: () => void;
 }
 
 export function AuthForm({
