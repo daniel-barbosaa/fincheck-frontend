@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 daily.md
+.env
 
 # Editor directories and files
 .vscode/*

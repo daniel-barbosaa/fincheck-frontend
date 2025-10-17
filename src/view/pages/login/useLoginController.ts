@@ -5,6 +5,7 @@ import {
   signInFormSchema,
   type SignInFormSchema,
 } from "./sign-in-form-schema";
+import { api } from "../../../app/services/api";
 
 export function useLoginController() {
   const {
@@ -16,8 +17,9 @@ export function useLoginController() {
     defaultValues: signInFormDefaultValues,
   });
 
-  const handleSubmit = hookFormHandleSubmit((data) => {
+  const handleSubmit = hookFormHandleSubmit(async (data) => {
     //TODO: integrate with API
+    await api.post("/auth/signin");
     console.log(data);
   });
 
