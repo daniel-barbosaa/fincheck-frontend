@@ -1,10 +1,11 @@
-import { Input } from "../../components/Input";
+import { Button } from "../../components/button";
+import { Input } from "../../components/input";
 
-import { AuthForm } from "../../components/authForm/AuthForm";
+import { AuthForm } from "../../components/auth-form";
 import { useLoginController } from "./useLoginController";
 
 export function Login() {
-  const { handleSubmit, register, errors } = useLoginController();
+  const { handleSubmit, register, errors, isPending } = useLoginController();
   return (
     <AuthForm
       onSubmit={handleSubmit}
@@ -12,7 +13,6 @@ export function Login() {
       subtitle="Novo por aqui?"
       linkText="Crie uma conta"
       linkTo="/register"
-      buttonText="Entrar"
     >
       <Input
         type="email"
@@ -26,6 +26,9 @@ export function Login() {
         {...register("password")}
         error={errors.password?.message}
       />
+      <Button type="submit" className="mt-2" isLoading={isPending}>
+        Entrar
+      </Button>
     </AuthForm>
   );
 }

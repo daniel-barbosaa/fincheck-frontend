@@ -1,9 +1,10 @@
-import { AuthForm } from "../../components/authForm/AuthForm";
-import { Input } from "../../components/Input";
+import { AuthForm } from "../../components/auth-form";
+import { Button } from "../../components/button";
+import { Input } from "../../components/input";
 import { useRegisterController } from "./useRegisterController";
 
 export function Register() {
-  const { errors, register, handleSubmit } = useRegisterController();
+  const { errors, register, handleSubmit, isPending } = useRegisterController();
   return (
     <AuthForm
       onSubmit={handleSubmit}
@@ -11,10 +12,9 @@ export function Register() {
       subtitle="Já possui uma conta?"
       linkText="Fazer login"
       linkTo="/login"
-      buttonText="Criar conta"
     >
       <Input
-        type="nome"
+        type="text"
         placeholder="Nome"
         {...register("name")}
         error={errors.name?.message}
@@ -31,6 +31,9 @@ export function Register() {
         {...register("password")}
         error={errors.password?.message}
       />
+      <Button type="submit" className="mt-2" isLoading={isPending}>
+        Criar conta
+      </Button>
     </AuthForm>
   );
 }

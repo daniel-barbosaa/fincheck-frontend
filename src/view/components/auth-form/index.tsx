@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Button } from "../Button";
 import type React from "react";
 
 interface AuthFormProps {
@@ -7,7 +6,6 @@ interface AuthFormProps {
   subtitle: string;
   linkText: string;
   linkTo: string;
-  buttonText: string;
   children: React.ReactNode;
   onSubmit?: () => void;
 }
@@ -17,7 +15,7 @@ export function AuthForm({
   subtitle,
   linkText,
   linkTo,
-  buttonText,
+
   children,
   onSubmit,
 }: AuthFormProps) {
@@ -41,10 +39,6 @@ export function AuthForm({
 
       <form onSubmit={onSubmit} className="mt-[60px] flex flex-col gap-y-4">
         {children}
-
-        <Button type="submit" className="mt-2">
-          {buttonText}
-        </Button>
       </form>
     </div>
   );

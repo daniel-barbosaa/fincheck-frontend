@@ -5,10 +5,15 @@ import {
   registerFormSchema,
   type RegisterFormSchema,
 } from "./register-form-schema";
+import { authService } from "../../../app/services/auth-service";
+import { useMutation } from "@tanstack/react-query";
+import type { SignupParams } from "../../../app/services/auth-service/signup";
+
+import { toast } from "react-hot-toast";
 
 export function useRegisterController() {
   const {
-    handleSubmit: hookFormHandleSubmit,
+    handleSubmit: hookFormSubmit,
     register,
     formState: { errors },
   } = useForm<RegisterFormSchema>({
@@ -16,10 +21,19 @@ export function useRegisterController() {
     defaultValues: registerFormDefaultValues,
   });
 
-  const handleSubmit = hookFormHandleSubmit((data) => {
-    //TODO: integrate with API
-    console.log(data);
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: async (data: SignupParams) => {
+      return authService.signUp(data);
+    },
   });
 
-  return { handleSubmit, register, errors };
+  const handleSubmit = hookFormSubmit(async (data) => {
+    try {
+      await mutateAsync(data);
+    } catch {
+      toast.error("Ocorreu um erro ao criar sua conta!");
+    }
+  });
+
+  return { handleSubmit, register, errors, isPending };
 }
