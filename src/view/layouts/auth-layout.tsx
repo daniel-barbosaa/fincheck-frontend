@@ -1,12 +1,11 @@
 import { Outlet } from "react-router-dom";
 import illustration from "../../assets/Login.png";
-
-import { Logo } from "../components/Logo";
+import { Logo } from "../components/logo";
 
 export function AuthLayout() {
   return (
     <div className="flex h-full w-full">
-      <div className="w-full h-full flex justify-center items-center flex-col lg:w-1/2 gap-y-16">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-y-16 lg:w-1/2">
         <Logo className="h-6 text-gray-500" />
 
         <div className="w-full max-w-[504px] px-8">
@@ -14,15 +13,15 @@ export function AuthLayout() {
         </div>
       </div>
 
-      <div className="w-1/2 h-full hidden justify-center items-center p-8 lg:flex">
+      <div className="hidden h-full w-1/2 items-center justify-center p-8 lg:flex">
         <img
           src={illustration}
-          className="object-cover w-full max-w-[656px] max-h-[960px] h-full select-none rounded-4xl"
+          className="h-full max-h-[960px] w-full max-w-[656px] rounded-4xl object-cover select-none"
         />
 
-        <div className="max-w-[656px] bg-white p-10 absolute rounded-b-4xl bottom-8">
-          <Logo className="text-teal-900 h-8" />
-          <p className="text-gray-700 font-medium text-xl mt-6">
+        <div className="absolute bottom-8 mx-8 max-w-[656px] rounded-b-4xl bg-white p-10">
+          <Logo className="h-8 text-teal-900" />
+          <p className="mt-6 text-xl font-medium text-gray-700">
             Gerencie suas finanças pessoais de uma forma simples com o fincheck,
             e o melhor, totalmente de graça!
           </p>

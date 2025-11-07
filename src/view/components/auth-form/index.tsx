@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Button } from "../Button";
 import type React from "react";
 
 interface AuthFormProps {
@@ -7,8 +6,8 @@ interface AuthFormProps {
   subtitle: string;
   linkText: string;
   linkTo: string;
-  buttonText: string;
   children: React.ReactNode;
+  onSubmit?: () => void;
 }
 
 export function AuthForm({
@@ -16,33 +15,30 @@ export function AuthForm({
   subtitle,
   linkText,
   linkTo,
-  buttonText,
+
   children,
+  onSubmit,
 }: AuthFormProps) {
   return (
     <div>
-      <header className=" flex flex-col items-center gap-y-4">
-        <h1 className="text-2xl font-bold text-gray-900 tracking-[-1px]">
+      <header className="flex flex-col items-center gap-y-4">
+        <h1 className="text-2xl font-bold tracking-[-1px] text-gray-900">
           {title}
         </h1>
 
         <p className="space-x-2">
-          <span className="text-gray-700 tracking-[-0.5px]">{subtitle}</span>
+          <span className="tracking-[-0.5px] text-gray-700">{subtitle}</span>
           <Link
             to={linkTo}
-            className="text-teal-900 font-medium tracking-[-0.5px]"
+            className="font-medium tracking-[-0.5px] text-teal-900"
           >
             {linkText}
           </Link>
         </p>
       </header>
 
-      <form action="" className="mt-[60px] flex flex-col gap-y-4">
+      <form onSubmit={onSubmit} className="mt-[60px] flex flex-col gap-y-4">
         {children}
-
-        <Button type="submit" className="mt-2">
-          {buttonText}
-        </Button>
       </form>
     </div>
   );
