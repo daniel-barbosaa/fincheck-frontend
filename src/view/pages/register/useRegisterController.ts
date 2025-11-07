@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import type { SignupParams } from "../../../app/services/auth-service/signup";
 
 import { toast } from "react-hot-toast";
+import { useAuth } from "../../../app/hooks/useAuth";
 
 export function useRegisterController() {
   const {
@@ -26,10 +27,12 @@ export function useRegisterController() {
       return authService.signUp(data);
     },
   });
+  const { signin } = useAuth();
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
-      await mutateAsync(data);
+      const { accessToken } = await mutateAsync(data);
+      signin(accessToken);
     } catch {
       toast.error("Ocorreu um erro ao criar sua conta!");
     }
