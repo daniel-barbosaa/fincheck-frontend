@@ -2,7 +2,7 @@ import { Button } from "../../components/button";
 import { Input } from "../../components/input";
 
 import { AuthForm } from "../../components/auth-form";
-import { useLoginController } from "./useLoginController";
+import { useLoginController } from "./use-login-controller";
 
 export function Login() {
   const { handleSubmit, register, errors, isPending } = useLoginController();

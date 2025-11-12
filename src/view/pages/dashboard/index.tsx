@@ -1,4 +1,4 @@
-import { useAuth } from "../../../app/hooks/useAuth";
+import { useAuth } from "../../../app/hooks/use-auth";
 import { Button } from "../../components/button";
 
 export function Dashboard() {

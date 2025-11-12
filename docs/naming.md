@@ -1,32 +1,63 @@
 # Convenção de nomes
 
-**Componentes React** → `PascalCase`
+**Componentes React**
 
-```
-AuthForm.tsx
-Header.tsx
-Button.tsx
-```
+O arquivo em Kebab Case `page-example.tsx`, o componente em Pascal Case `HeaderButton`, padrão usado no React.
 
-**Hooks** → `camelCase`, sempre começando com **use**
+Exemplo:
 
-```
-useAuth.ts
-useLocalStorage.ts
+```tsx
+export function HeaderAction() {
+  return <h1>Header Action</h1>;
+}
 ```
 
-**Utils/funções helpers** → `camelCase`
+**`auth-form.tsx`**
+**`header.tsx`**
 
+**Hooks**
+
+Kebab Case `use-auth.ts`, sempre começando com **use**.
+
+A função em Camel Case.
+
+Exemplo:
+
+```ts
+export function useAuth() {
+  return "useAuth";
+}
 ```
-formatDate.ts
-validateEmail.ts
+
+**`use-auth.ts`**
+
+**Utils/funções helpers**
+
+Arquivos em Kebab Case `format-date.ts`.
+
+As funções em Camel Case `formatDate`.
+
+Exemplo:
+
+```ts
+export function formatDate() {
+  return "formatDate";
+}
 ```
 
-**Constantes** → `SCREAMING_SNAKE_CASE` dentro do arquivo, mas o arquivo em si pode ser `camelCase` ou `kebab-case`
+`format-date.ts`
+`validate-email.ts`
 
-**routes.ts** → exporta
+**Constantes**
 
-```
-ROUTES.LOGIN,
-ROUTES.REGISTER
+As váriaveis exportadas deve ser em SNAKE CASE `STORAGE_KEY_SNAKE_CASE`.
+
+Já o arquivo em Kebab Case `storage-key.ts`.
+
+Exemplo:
+
+```ts
+export const STORAGE_KEYS = {
+  accessToken: "fincheck:accessToken",
+};
 ```

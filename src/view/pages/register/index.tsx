@@ -1,7 +1,7 @@
 import { AuthForm } from "../../components/auth-form";
 import { Button } from "../../components/button";
 import { Input } from "../../components/input";
-import { useRegisterController } from "./useRegisterController";
+import { useRegisterController } from "./use-register-controller";
 
 export function Register() {
   const { errors, register, handleSubmit, isPending } = useRegisterController();
