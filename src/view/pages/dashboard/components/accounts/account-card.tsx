@@ -1,6 +1,6 @@
-import { formatCurrency } from "../../../../app/utils/formatters/format-currency";
-import { Card } from "../../../components/card";
-import { BankAccountTypeIcon } from "../../../components/icons/bank-account-type-icon";
+import { formatCurrency } from "../../../../../app/utils/formatters/format-currency";
+import { Card } from "../../../../components/card";
+import { BankAccountTypeIcon } from "../../../../components/icons/bank-account-type-icon";
 
 interface AccountCardProps {
   name: string;

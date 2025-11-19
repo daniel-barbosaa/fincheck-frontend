@@ -1,13 +1,17 @@
-import { Card } from "../../../components/card";
-import { EyeIcon } from "../../../components/icons/eye-icon";
+import { Card } from "../../../../components/card";
+import { EyeIcon } from "../../../../components/icons/eye-icon";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { formatCurrency } from "../../../../app/utils/formatters/format-currency";
+import { formatCurrency } from "../../../../../app/utils/formatters/format-currency";
 
-import { AccountsSliderNavigation } from "./accounts-slider-navigation";
+import { AccountsSliderNavigation } from "./slider-navigation";
 import { AccountCard } from "./account-card";
 
+import { useAccountsController } from "./use-accounts-controller";
+
 export function Accounts() {
+  const { setSliderState, sliderState, windowWidth } = useAccountsController();
+
   return (
     <Card className="flex h-full w-full flex-col bg-teal-900 px-4 py-8 md:p-10">
       <div>
@@ -22,8 +26,18 @@ export function Accounts() {
           </button>
         </div>
       </div>
-      <div className="flex flex-1 flex-col justify-end">
-        <Swiper spaceBetween={16} slidesPerView={2.1} className="w-full">
+      <div className="mt-10 flex flex-1 flex-col justify-end md:mt-0">
+        <Swiper
+          spaceBetween={16}
+          slidesPerView={windowWidth >= 500 ? 2.1 : 1.2}
+          className="w-full"
+          onSlideChange={(swiper) => {
+            setSliderState({
+              isBeginning: swiper.isBeginning,
+              isEnd: swiper.isEnd,
+            });
+          }}
+        >
           <div
             className="mb-4 flex items-center justify-between"
             slot="container-start"
@@ -32,7 +46,10 @@ export function Accounts() {
               Minhas Contas
             </strong>
 
-            <AccountsSliderNavigation />
+            <AccountsSliderNavigation
+              isBeginning={sliderState.isBeginning}
+              isEnd={sliderState.isEnd}
+            />
           </div>
 
           {Array.from({ length: 5 }).map((_, i) => (
