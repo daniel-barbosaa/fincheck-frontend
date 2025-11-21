@@ -1,5 +1,11 @@
-import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { AuthContext } from "./auth-context";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
+
 import {
   getStorageItem,
   removeStorageItem,
@@ -9,6 +15,14 @@ import { STORAGE_KEYS } from "../../constants/storage-keys";
 import { useQuery } from "@tanstack/react-query";
 import { usersService } from "../../services/users-service";
 import { PageLoader } from "../../../view/components/page-loader";
+
+interface AuthContextValue {
+  signedIn: boolean;
+  signin(accessToken: string): void;
+  signout(): void;
+}
+
+const AuthContext = createContext({} as AuthContextValue);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [signedIn, setSignedIn] = useState<boolean>(() => {
@@ -53,3 +67,5 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     </AuthContext.Provider>
   );
 }
+
+export default AuthContext;

@@ -1,6 +1,8 @@
+import { cn } from "../../../../../app/utils/class-name-merge";
 import { formatCurrency } from "../../../../../app/utils/formatters/format-currency";
 import { Card } from "../../../../components/card";
 import { BankAccountTypeIcon } from "../../../../components/icons/bank-account-type-icon";
+import { useAccountsController } from "./use-accounts-controller";
 
 interface AccountCardProps {
   name: string;
@@ -9,6 +11,7 @@ interface AccountCardProps {
 }
 
 export function AccountCard({ currencyValue, name, type }: AccountCardProps) {
+  const { areValuesVisible } = useAccountsController();
   return (
     <Card
       className="flex h-50 flex-col justify-between border-b-4 border-amber-700 p-4"
@@ -21,7 +24,12 @@ export function AccountCard({ currencyValue, name, type }: AccountCardProps) {
         </span>
       </div>
       <div>
-        <span className="text-foreground/90 block font-medium tracking-tighter">
+        <span
+          className={cn(
+            "text-foreground/90 block font-medium tracking-tighter",
+            !areValuesVisible && "blur-sm",
+          )}
+        >
           {formatCurrency(currencyValue)}
         </span>
         <small className="text-foreground/60">Saldo atual</small>

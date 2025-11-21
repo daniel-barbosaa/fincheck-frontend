@@ -15,7 +15,6 @@ export function AuthForm({
   subtitle,
   linkText,
   linkTo,
-
   children,
   onSubmit,
 }: AuthFormProps) {
