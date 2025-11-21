@@ -5,7 +5,6 @@
 
 @theme {
   /* Colors */
-
   --color-foreground: #212529;
 
   --color-primary: #087f5b;
@@ -165,4 +164,18 @@
   --color-orange-700: #f76707;
   --color-orange-800: #e8590c;
   --color-orange-900: #d9480f;
+
+  --animate-slide-up-end-fade: slide-up-end-fade 0.3s
+    cubic-bezier(0.16, 1, 0.3, 1);
+
+  @keyframes slide-up-end-fade {
+    0% {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
