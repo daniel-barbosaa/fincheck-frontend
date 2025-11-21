@@ -1,7 +1,14 @@
 @import "tailwindcss";
 
+/*swiper slide styles*/
+@import "swiper/css";
+
 @theme {
   /* Colors */
+
+  --color-foreground: #212529;
+
+  --color-primary: #087f5b;
 
   /* Gray */
   --color-gray-50: #f8f9fa;

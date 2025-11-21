@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import type { SignupParams } from "../../../app/services/auth-service/signup";
 
 import { toast } from "react-hot-toast";
-import { useAuth } from "../../../app/hooks/useAuth";
+import { useAuth } from "../../../app/hooks/use-auth";
 
 export function useRegisterController() {
   const {
