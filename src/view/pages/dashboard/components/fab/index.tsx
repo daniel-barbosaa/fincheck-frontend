@@ -11,7 +11,7 @@ export function Fab() {
   return (
     <div className="fixed right-4 bottom-4">
       <DropdownMenu>
-        <DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
           <button className="flex size-12 items-center justify-center rounded-full bg-teal-900 text-white">
             <PlusIcon className="size-6" />
           </button>

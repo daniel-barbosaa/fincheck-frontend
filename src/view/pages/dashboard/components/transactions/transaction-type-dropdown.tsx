@@ -10,7 +10,7 @@ import { ExpensesIcon } from "../../../../components/icons/expenses-icon";
 export function TransactionTypeDropdown() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <button className="flex items-center gap-2">
           <TransactionsIcon />
           <span className="text-foreground/90 text-sm font-medium tracking-tighter">

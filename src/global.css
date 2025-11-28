@@ -4,9 +4,8 @@
 @import "swiper/css";
 
 @theme {
-  /* Colors */
+  /* Colors*/
   --color-foreground: #212529;
-
   --color-primary: #087f5b;
 
   /* Gray */
@@ -165,10 +164,15 @@
   --color-orange-800: #e8590c;
   --color-orange-900: #d9480f;
 
-  /* Dwopdown Animation*/
+  /* Shadows*/
+  --shadow-base: 0px 11px 20px 0px rgba(0, 0, 0, 0.1);
+
+  /*Animations*/
+
+  /* Dropdown animation*/
   --animate-slide-up-end-fade: slide-up-end-fade 0.3s
     cubic-bezier(0.16, 1, 0.3, 1);
-
+  --animate-slide-down-and-fade: slide-down-and-fade 0.3s;
   @keyframes slide-up-end-fade {
     0% {
       opacity: 0;
@@ -179,8 +183,6 @@
       transform: translateY(0);
     }
   }
-
-  --animate-slide-down-and-fade: slide-down-and-fade 0.3s;
   @keyframes slide-down-and-fade {
     0% {
       opacity: 0;
@@ -189,6 +191,18 @@
     100% {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  /* Modal animation */
+  --animate-overlay-show: overlay-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  @keyframes overlay-show {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }
 }

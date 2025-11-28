@@ -12,9 +12,17 @@ import { cn } from "../../../../../app/utils/class-name-merge";
 import { Spinner } from "../../../../components/spinner";
 import emptyState from "../../../../../assets/empty-state.svg";
 import { TransactionTypeDropdown } from "./transaction-type-dropdown";
+import { FiltersModal } from "./filters-modal";
 export function Transactions() {
-  const { areValuesVisible, isLoading, transaction, isInitialLoading } =
-    useTransactionsController();
+  const {
+    areValuesVisible,
+    isLoading,
+    transaction,
+    isInitialLoading,
+    isFiltersModalOpen,
+    handleCloseFiltersModal,
+    handleOpenFiltersModal,
+  } = useTransactionsController();
   const hasTransactions = transaction.length > 0;
 
   return (
@@ -24,13 +32,16 @@ export function Transactions() {
           <Spinner clasName="size-10" />
         </div>
       )}
-
       {!isInitialLoading && (
         <>
+          <FiltersModal
+            open={isFiltersModalOpen}
+            onOpenChange={handleCloseFiltersModal}
+          />
           <header>
             <div className="flex items-center justify-between">
               <TransactionTypeDropdown />
-              <button>
+              <button onClick={handleOpenFiltersModal}>
                 <FilterIcon />
               </button>
             </div>

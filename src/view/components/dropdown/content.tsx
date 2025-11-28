@@ -14,7 +14,7 @@ export function DropdownMenuContent({
     <DropdownMenuPrimitive.Portal>
       <DropdownMenuPrimitive.Content
         className={cn(
-          "space-y-2 rounded-2xl bg-white p-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]",
+          "shadow-base space-y-2 rounded-2xl bg-white p-2",
           "data-[side=bottom]:animate-slide-up-end-fade data-[side=top]:animate-slide-down-and-fade",
           className,
         )}
