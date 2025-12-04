@@ -1,6 +1,9 @@
 import { ACCOUNT_OPTIONS } from "../../../../../../app/types/account";
+import { Button } from "../../../../../components/button";
+import { ColorsDropdownInput } from "../../../../../components/colors-input";
+import { CurrencyInput } from "../../../../../components/currency-input";
 import { Input } from "../../../../../components/input";
-import { InputCurrency } from "../../../../../components/input-currency";
+
 import { Modal } from "../../../../../components/modal";
 import { ModalContent } from "../../../../../components/modal/content";
 import { ModalHeader } from "../../../../../components/modal/header";
@@ -21,13 +24,18 @@ export function NewAccountModal() {
             </span>
             <div className="flex items-center gap-2">
               <span className="text-foreground/70 tracking-tight">R$</span>
-              <InputCurrency />
+              <CurrencyInput />
             </div>
           </div>
           <div className="mt-10 flex flex-col gap-4">
             <Input type="text" name="name" placeholder="Nome da conta" />
             <Select placeholder="Tipo" options={ACCOUNT_OPTIONS} />
+            <ColorsDropdownInput />
           </div>
+
+          <Button className="mt-6 w-full" type="submit">
+            Criar
+          </Button>
         </form>
       </ModalContent>
     </Modal>
