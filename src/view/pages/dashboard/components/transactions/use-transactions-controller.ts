@@ -4,7 +4,7 @@ import { useDashboard } from "../../dashboard-context/use-dashboard";
 export function useTransactionsController() {
   const { areValuesVisible } = useDashboard();
 
-  const [isFiltersModalOpen, setIsFilterModalOpen] = useState<boolean>(true);
+  const [isFiltersModalOpen, setIsFilterModalOpen] = useState<boolean>(false);
 
   function handleOpenFiltersModal() {
     setIsFilterModalOpen(true);

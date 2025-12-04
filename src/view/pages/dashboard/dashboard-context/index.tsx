@@ -8,12 +8,16 @@ import { STORAGE_KEYS } from "../../../../app/constants/storage-keys";
 interface DashboardContextValue {
   toggleValuesVisibility(): void;
   areValuesVisible: boolean;
+  openNewAccountModal(): void;
+  isNewAccountModalOpen: boolean;
+  closeNewAccountModal(): void;
 }
 
 const DashboardContext = createContext({} as DashboardContextValue);
 
 export function DashboardProvider({ children }: { children: ReactNode }) {
   const [valueVisible, setAreValuesVisible] = useState(true);
+  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(true);
   const { valuesVisibleKey } = STORAGE_KEYS;
   const areValuesVisible = getStorageItem(valuesVisibleKey) as boolean;
 
@@ -22,9 +26,22 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
     setStorageItem(valuesVisibleKey, valueVisible);
   }, [valueVisible, valuesVisibleKey]);
 
+  const openNewAccountModal = useCallback(() => {
+    setIsNewAccountModalOpen(true);
+  }, []);
+  const closeNewAccountModal = useCallback(() => {
+    setIsNewAccountModalOpen(false);
+  }, []);
+
   return (
     <DashboardContext.Provider
-      value={{ toggleValuesVisibility, areValuesVisible }}
+      value={{
+        toggleValuesVisibility,
+        areValuesVisible,
+        openNewAccountModal,
+        isNewAccountModalOpen,
+        closeNewAccountModal,
+      }}
     >
       {children}
     </DashboardContext.Provider>

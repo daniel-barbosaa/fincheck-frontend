@@ -2,6 +2,7 @@ import { Logo } from "../../components/logo";
 import { UserMenu } from "../../components/user-menu";
 import { Accounts } from "./components/accounts";
 import { Fab } from "./components/fab";
+import { NewAccountModal } from "./components/modals/new-account-modal";
 import { Transactions } from "./components/transactions";
 import { DashboardProvider } from "./dashboard-context";
 
@@ -22,6 +23,7 @@ export function Dashboard() {
           </section>
         </main>
         <Fab />
+        <NewAccountModal />
       </div>
     </DashboardProvider>
   );

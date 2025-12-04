@@ -6,8 +6,10 @@ import { DropdownMenuItem } from "../../../../components/dropdown/item";
 
 import { BankAccountIcon } from "../../../../components/icons/bank-account-icon";
 import { CategoryIcon } from "../../../../components/icons/categories/category-icon";
+import { useDashboard } from "../../dashboard-context/use-dashboard";
 
 export function Fab() {
+  const { openNewAccountModal } = useDashboard();
   return (
     <div className="fixed right-4 bottom-4">
       <DropdownMenu>
@@ -25,7 +27,7 @@ export function Fab() {
             <CategoryIcon type="income" />
             Nova Receita
           </DropdownMenuItem>
-          <DropdownMenuItem className="gap-2">
+          <DropdownMenuItem className="gap-2" onSelect={openNewAccountModal}>
             <BankAccountIcon />
             Nova Conta
           </DropdownMenuItem>
