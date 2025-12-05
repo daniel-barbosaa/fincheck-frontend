@@ -4,20 +4,29 @@ import {
   setStorageItem,
 } from "../../../../app/helpers/local-storage";
 import { STORAGE_KEYS } from "../../../../app/constants/storage-keys";
+import type { TransactionType } from "../../../../app/types/transaction";
 
 interface DashboardContextValue {
-  toggleValuesVisibility(): void;
   areValuesVisible: boolean;
-  openNewAccountModal(): void;
+  isNewTransactionModalOpen: boolean;
   isNewAccountModalOpen: boolean;
+  newTransactionType: TransactionType | null;
+  openNewAccountModal(): void;
   closeNewAccountModal(): void;
+  openNewTransactionModal(type: TransactionType): void;
+  closeNewTransactionModal(): void;
+  toggleValuesVisibility(): void;
 }
 
 const DashboardContext = createContext({} as DashboardContextValue);
 
 export function DashboardProvider({ children }: { children: ReactNode }) {
   const [valueVisible, setAreValuesVisible] = useState(true);
-  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(true);
+  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
+  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
+    useState(true);
+  const [newTransactionType, setNewTransactionType] =
+    useState<TransactionType | null>(null);
   const { valuesVisibleKey } = STORAGE_KEYS;
   const areValuesVisible = getStorageItem(valuesVisibleKey) as boolean;
 
@@ -33,6 +42,15 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
     setIsNewAccountModalOpen(false);
   }, []);
 
+  const openNewTransactionModal = useCallback((type: TransactionType) => {
+    setNewTransactionType(type);
+    setIsNewTransactionModalOpen(true);
+  }, []);
+  const closeNewTransactionModal = useCallback(() => {
+    setNewTransactionType(null);
+    setIsNewTransactionModalOpen(false);
+  }, []);
+
   return (
     <DashboardContext.Provider
       value={{
@@ -41,6 +59,10 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
         openNewAccountModal,
         isNewAccountModalOpen,
         closeNewAccountModal,
+        openNewTransactionModal,
+        closeNewTransactionModal,
+        isNewTransactionModalOpen,
+        newTransactionType,
       }}
     >
       {children}
