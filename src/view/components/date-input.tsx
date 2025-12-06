@@ -3,8 +3,7 @@ import { cn } from "../../app/utils/class-name-merge";
 import { FieldError } from "./field-error";
 import { formatDate } from "../../app/utils/formatters/format-date";
 import { Popover } from "./popover";
-import { PopoverTrigger } from "./popover/trigger";
-import { PopoverContent } from "./popover/content";
+
 import { Calendar } from "./calendar";
 
 interface DateInputProps {
@@ -15,8 +14,8 @@ export function DateInput({ className, error }: DateInputProps) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   return (
     <div>
-      <Popover>
-        <PopoverTrigger asChild>
+      <Popover.Root>
+        <Popover.Trigger asChild>
           <button
             type="button"
             className={cn(
@@ -30,14 +29,14 @@ export function DateInput({ className, error }: DateInputProps) {
             </span>
             <span>{formatDate(selectedDate)}</span>
           </button>
-        </PopoverTrigger>
-        <PopoverContent className="p-4">
+        </Popover.Trigger>
+        <Popover.Content className="p-4">
           <Calendar
             value={selectedDate}
             onChange={(date) => setSelectedDate(date)}
           />
-        </PopoverContent>
-      </Popover>
+        </Popover.Content>
+      </Popover.Root>
       <FieldError error={error} />
     </div>
   );
