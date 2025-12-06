@@ -3,20 +3,21 @@ import { Button } from "../../../../../components/button";
 import { ColorsDropdownInput } from "../../../../../components/colors-input";
 import { CurrencyInput } from "../../../../../components/currency-input";
 import { Input } from "../../../../../components/input";
-
 import { Modal } from "../../../../../components/modal";
-import { ModalContent } from "../../../../../components/modal/content";
-import { ModalHeader } from "../../../../../components/modal/header";
 import { Select } from "../../../../../components/select";
+
 import { useNewAccountModalController } from "./use-new-account-modal-controller";
 
 export function NewAccountModal() {
   const { isNewAccountModalOpen, closeNewAccountModal } =
     useNewAccountModalController();
   return (
-    <Modal open={isNewAccountModalOpen} onOpenChange={closeNewAccountModal}>
-      <ModalContent>
-        <ModalHeader>Nova Conta</ModalHeader>
+    <Modal.Root
+      open={isNewAccountModalOpen}
+      onOpenChange={closeNewAccountModal}
+    >
+      <Modal.Content>
+        <Modal.Header>Nova Conta</Modal.Header>
         <form>
           <div>
             <span className="text-foreground/70 text-xs tracking-tight">
@@ -37,7 +38,7 @@ export function NewAccountModal() {
             Criar
           </Button>
         </form>
-      </ModalContent>
-    </Modal>
+      </Modal.Content>
+    </Modal.Root>
   );
 }

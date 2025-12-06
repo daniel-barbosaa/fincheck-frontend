@@ -6,8 +6,7 @@ import { DateInput } from "../../../../../components/date-input";
 import { Input } from "../../../../../components/input";
 
 import { Modal } from "../../../../../components/modal";
-import { ModalContent } from "../../../../../components/modal/content";
-import { ModalHeader } from "../../../../../components/modal/header";
+
 import { Select } from "../../../../../components/select";
 import { useNewTransactionModalController } from "./use-new-transaction-modal-controller";
 
@@ -19,12 +18,14 @@ export function NewTransactionModal() {
   } = useNewTransactionModalController();
   const isExpense = newTransactionType === "EXPENSE";
   return (
-    <Modal
+    <Modal.Root
       open={isNewTransactionModalOpen}
       onOpenChange={closeNewTransactionModal}
     >
-      <ModalContent>
-        <ModalHeader>{isExpense ? "Nova despesa" : "Nova Receita"}</ModalHeader>
+      <Modal.Content>
+        <Modal.Header>
+          {isExpense ? "Nova despesa" : "Nova Receita"}
+        </Modal.Header>
         <form>
           <div>
             <span className="text-foreground/70 text-xs tracking-tight">
@@ -53,7 +54,7 @@ export function NewTransactionModal() {
             Criar
           </Button>
         </form>
-      </ModalContent>
-    </Modal>
+      </Modal.Content>
+    </Modal.Root>
   );
 }

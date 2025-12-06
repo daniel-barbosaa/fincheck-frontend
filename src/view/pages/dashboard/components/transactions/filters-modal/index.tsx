@@ -1,7 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { Modal } from "../../../../../components/modal";
-import { ModalContent } from "../../../../../components/modal/content";
-import { ModalHeader } from "../../../../../components/modal/header";
 import { Button } from "../../../../../components/button";
 import { useFiltersModal } from "./use-filters-modal";
 import { cn } from "../../../../../../app/utils/class-name-merge";
@@ -34,9 +32,9 @@ export function FiltersModal({ onOpenChange, open }: FiltersModalProps) {
     handleChangeYear,
   } = useFiltersModal();
   return (
-    <Modal open={open} onOpenChange={onOpenChange}>
-      <ModalContent>
-        <ModalHeader>Filtros</ModalHeader>
+    <Modal.Root open={open} onOpenChange={onOpenChange}>
+      <Modal.Content>
+        <Modal.Header>Filtros</Modal.Header>
         <div>
           <span className="text-foreground/90 text-lg font-bold tracking-tight">
             Conta
@@ -80,7 +78,7 @@ export function FiltersModal({ onOpenChange, open }: FiltersModalProps) {
           </div>
         </div>
         <Button className="mt-10 w-full">Aplicar Filtros</Button>
-      </ModalContent>
-    </Modal>
+      </Modal.Content>
+    </Modal.Root>
   );
 }
