@@ -1,11 +1,11 @@
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { cn } from "../../app/utils/class-name-merge";
-import { DropdownMenu } from "./dropdown";
-import { DropdownMenuContent } from "./dropdown/content";
-import { DropdownMenuItem } from "./dropdown/item";
-import { DropdownMenuTrigger } from "./dropdown/trigger";
+import { cn } from "../../../app/utils/class-name-merge";
+import { DropdownMenu } from "../dropdown";
+import { DropdownMenuContent } from "../dropdown/content";
+import { DropdownMenuItem } from "../dropdown/item";
+import { DropdownMenuTrigger } from "../dropdown/trigger";
 import { FieldError } from "./field-error";
-import { ColorIcon } from "./icons/color-icon";
+import { ColorIcon } from "../icons/color-icon";
 import { useState } from "react";
 
 interface ColorsDropdownInputProps {

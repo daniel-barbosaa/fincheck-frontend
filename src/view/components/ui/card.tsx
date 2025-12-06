@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from "react";
-import { cn } from "../../app/utils/class-name-merge";
+import { cn } from "../../../app/utils/class-name-merge";
 
 type CardProps = HTMLAttributes<HTMLDivElement>;
 

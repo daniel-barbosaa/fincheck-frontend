@@ -1,6 +1,6 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import React, { type ReactNode } from "react";
-import { cn } from "../../app/utils/class-name-merge";
+import { cn } from "../../../app/utils/class-name-merge";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
 function ModalRoot(

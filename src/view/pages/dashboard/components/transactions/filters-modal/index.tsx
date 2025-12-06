@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { Modal } from "../../../../../components/modal";
-import { Button } from "../../../../../components/button";
+import { Modal } from "../../../../../components/ui/modal";
+import { Button } from "../../../../../components/ui/button";
 import { useFiltersModal } from "./use-filters-modal";
 import { cn } from "../../../../../../app/utils/class-name-merge";
 

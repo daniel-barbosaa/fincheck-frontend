@@ -1,4 +1,4 @@
-import { Card } from "../../../../components/card";
+import { Card } from "../../../../components/ui/card";
 import { FilterIcon } from "../../../../components/icons/filter-icon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { MONTHS } from "../../../../../app/constants/months";
@@ -9,7 +9,7 @@ import { formatCurrency } from "../../../../../app/utils/formatters/format-curre
 import { CategoryIcon } from "../../../../components/icons/categories/category-icon";
 import { useTransactionsController } from "./use-transactions-controller";
 import { cn } from "../../../../../app/utils/class-name-merge";
-import { Spinner } from "../../../../components/spinner";
+import { Spinner } from "../../../../components/ui/spinner";
 import emptyState from "../../../../../assets/empty-state.svg";
 import { TransactionTypeDropdown } from "./transaction-type-dropdown";
 import { FiltersModal } from "./filters-modal";

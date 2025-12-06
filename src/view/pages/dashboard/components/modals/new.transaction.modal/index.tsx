@@ -1,13 +1,13 @@
 import { ACCOUNT_OPTIONS } from "../../../../../../app/types/account";
-import { Button } from "../../../../../components/button";
+import { Button } from "../../../../../components/ui/button";
 
-import { CurrencyInput } from "../../../../../components/currency-input";
-import { DateInput } from "../../../../../components/date-input";
-import { Input } from "../../../../../components/input";
+import { CurrencyInput } from "../../../../../components/ui/currency-input";
+import { DateInput } from "../../../../../components/ui/date-input";
+import { Input } from "../../../../../components/ui/input";
 
-import { Modal } from "../../../../../components/modal";
+import { Modal } from "../../../../../components/ui/modal";
 
-import { Select } from "../../../../../components/select";
+import { Select } from "../../../../../components/ui/select";
 import { useNewTransactionModalController } from "./use-new-transaction-modal-controller";
 
 export function NewTransactionModal() {

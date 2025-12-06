@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { cn } from "../../app/utils/class-name-merge";
+import { cn } from "../../../app/utils/class-name-merge";
 import { Spinner } from "./spinner";
 
 interface ButtonProps extends ComponentProps<"button"> {

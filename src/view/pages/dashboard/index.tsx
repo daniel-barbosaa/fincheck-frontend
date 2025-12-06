@@ -1,4 +1,4 @@
-import { Logo } from "../../components/logo";
+import { Logo } from "../../components/ui/logo";
 import { UserMenu } from "../../components/user-menu";
 import { Accounts } from "./components/accounts";
 import { Fab } from "./components/fab";

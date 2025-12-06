@@ -1,4 +1,4 @@
-import { Card } from "../../../../components/card";
+import { Card } from "../../../../components/ui/card";
 import { EyeIcon } from "../../../../components/icons/eye-icon";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,7 +9,7 @@ import { AccountCard } from "./account-card";
 
 import { useAccountsController } from "./use-accounts-controller";
 import { cn } from "../../../../../app/utils/class-name-merge";
-import { Spinner } from "../../../../components/spinner";
+import { Spinner } from "../../../../components/ui/spinner";
 import { PlusIcon } from "@radix-ui/react-icons";
 
 export function Accounts() {

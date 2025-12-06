@@ -1,10 +1,10 @@
 import { ACCOUNT_OPTIONS } from "../../../../../../app/types/account";
-import { Button } from "../../../../../components/button";
-import { ColorsDropdownInput } from "../../../../../components/colors-input";
-import { CurrencyInput } from "../../../../../components/currency-input";
-import { Input } from "../../../../../components/input";
-import { Modal } from "../../../../../components/modal";
-import { Select } from "../../../../../components/select";
+import { Button } from "../../../../../components/ui/button";
+import { ColorsDropdownInput } from "../../../../../components/ui/colors-input";
+import { CurrencyInput } from "../../../../../components/ui/currency-input";
+import { Input } from "../../../../../components/ui/input";
+import { Modal } from "../../../../../components/ui/modal";
+import { Select } from "../../../../../components/ui/select";
 
 import { useNewAccountModalController } from "./use-new-account-modal-controller";
 

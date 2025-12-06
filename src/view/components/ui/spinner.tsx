@@ -1,4 +1,4 @@
-import { cn } from "../../app/utils/class-name-merge";
+import { cn } from "../../../app/utils/class-name-merge";
 
 interface SpinnerProps {
   clasName?: string;

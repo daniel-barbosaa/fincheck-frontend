@@ -1,7 +1,7 @@
 import * as SelectPrimitive from "@radix-ui/react-select";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
-import { cn } from "../../app/utils/class-name-merge";
+import { cn } from "../../../app/utils/class-name-merge";
 import { FieldError } from "./field-error";
 import { useState } from "react";
 

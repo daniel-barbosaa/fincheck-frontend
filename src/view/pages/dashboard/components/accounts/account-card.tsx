@@ -1,6 +1,6 @@
 import { cn } from "../../../../../app/utils/class-name-merge";
 import { formatCurrency } from "../../../../../app/utils/formatters/format-currency";
-import { Card } from "../../../../components/card";
+import { Card } from "../../../../components/ui/card";
 import { BankAccountTypeIcon } from "../../../../components/icons/bank-account-type-icon";
 import { useAccountsController } from "./use-accounts-controller";
 

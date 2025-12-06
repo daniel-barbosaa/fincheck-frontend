@@ -14,7 +14,7 @@ import {
 import { STORAGE_KEYS } from "../../constants/storage-keys";
 import { useQuery } from "@tanstack/react-query";
 import { usersService } from "../../services/users-service";
-import { PageLoader } from "../../../view/components/page-loader";
+import { PageLoader } from "../../../view/components/ui/page-loader";
 
 interface AuthContextValue {
   signedIn: boolean;

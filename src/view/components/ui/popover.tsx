@@ -1,6 +1,6 @@
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import type { ReactNode } from "react";
-import { cn } from "../../app/utils/class-name-merge";
+import { cn } from "../../../app/utils/class-name-merge";
 
 function PopoverRoot({ children }: { children: ReactNode }) {
   return <PopoverPrimitive.Root>{children}</PopoverPrimitive.Root>;
