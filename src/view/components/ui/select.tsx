@@ -18,7 +18,6 @@ type SelectOptions = {
 
 interface RequiredSelectProps {
   className?: string;
-  error?: string;
   placeholder?: string;
   options: SelectOptions[];
 }

@@ -41,7 +41,6 @@ export function NewAccountModal() {
           <div className="mt-10 flex flex-col gap-4">
             <InputText
               name="name"
-              type="text"
               placeholder="Nome da conta"
               control={formMethods.control}
             />
@@ -51,7 +50,7 @@ export function NewAccountModal() {
               options={ACCOUNT_OPTIONS}
               control={formMethods.control}
             />
-            <ColorsDropdownInput />
+            <ColorsDropdownInput name="color" control={formMethods.control} />
           </div>
 
           <Button className="mt-6 w-full" type="submit">

@@ -6,11 +6,16 @@ import { DropdownMenuItem } from "../dropdown/item";
 import { DropdownMenuTrigger } from "../dropdown/trigger";
 import { FieldError } from "./field-error";
 import { ColorIcon } from "../icons/color-icon";
-import { useState } from "react";
+
+import {
+  Controller,
+  type Control,
+  type FieldPath,
+  type FieldValues,
+} from "react-hook-form";
 
 interface ColorsDropdownInputProps {
   className?: string;
-  error?: string;
 }
 type Colors = {
   color: string;
@@ -34,50 +39,69 @@ const colors: Colors[] = [
   { color: "#212529", bg: "#F8F9FA" },
 ];
 
-export function ColorsDropdownInput({
-  className,
-  error,
-}: ColorsDropdownInputProps) {
-  const [selectedColor, setSelectedColor] = useState<null | Colors>(null);
+type ColorsInputProps<T extends FieldValues> = ColorsDropdownInputProps & {
+  name: FieldPath<T>;
+  control: Control<T>;
+};
 
-  function handleSelect(color: Colors) {
-    setSelectedColor(color);
-  }
+export function ColorsDropdownInput<T extends FieldValues>({
+  className,
+  name,
+  control,
+}: ColorsInputProps<T>) {
   return (
-    <div>
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          asChild
-          className={cn(
-            "text-foreground/80 relative h-13 w-full rounded-lg border border-gray-500 bg-white px-3 text-left transition-all outline-none focus:border-gray-800",
-            className,
-            error && "!border-red-900",
-          )}
-        >
-          <button>
-            Cor
-            <div className="absolute top-1/2 right-3 -translate-y-1/2">
-              {!selectedColor && (
-                <ChevronDownIcon className="text-foreground/90 size-6" />
-              )}
-              {selectedColor && (
-                <ColorIcon color={selectedColor.color} bg={selectedColor.bg} />
-              )}
-            </div>
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="grid grid-cols-4">
-          {colors.map((color) => (
-            <DropdownMenuItem
-              key={color.color}
-              onSelect={() => handleSelect(color)}
-            >
-              <ColorIcon color={color.color} bg={color.bg} />
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-      <FieldError error={error} />
-    </div>
+    <Controller
+      name={name}
+      control={control}
+      render={({ field: { value, onChange }, fieldState: { error } }) => {
+        const showMessageError = error?.message;
+
+        const selectedColor = colors.find((color) => color.color === value);
+
+        function handleSelect(value: Colors) {
+          onChange(value.color);
+        }
+        return (
+          <div>
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                asChild
+                className={cn(
+                  "text-foreground/80 relative h-13 w-full rounded-lg border border-gray-500 bg-white px-3 text-left transition-all outline-none focus:border-gray-800",
+                  className,
+                  showMessageError && "!border-red-900",
+                )}
+              >
+                <button>
+                  Cor
+                  <div className="absolute top-1/2 right-3 -translate-y-1/2">
+                    {!selectedColor && (
+                      <ChevronDownIcon className="text-foreground/90 size-6" />
+                    )}
+                    {selectedColor && (
+                      <ColorIcon
+                        color={selectedColor.color}
+                        bg={selectedColor.bg}
+                      />
+                    )}
+                  </div>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="grid grid-cols-4">
+                {colors.map((color) => (
+                  <DropdownMenuItem
+                    key={color.color}
+                    onSelect={() => handleSelect(color)}
+                  >
+                    <ColorIcon color={color.color} bg={color.bg} />
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <FieldError error={showMessageError} />
+          </div>
+        );
+      }}
+    />
   );
 }

@@ -30,6 +30,7 @@ export function InputText<T extends FieldValues>({
             onChange={onChange}
             value={value}
             placeholder={placeholder}
+            type="text"
           />
         );
       }}
