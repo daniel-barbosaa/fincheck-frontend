@@ -33,8 +33,8 @@ export function NewAccountModal() {
             <div className="flex items-center gap-2">
               <span className="text-foreground/70 tracking-tight">R$</span>
               <CurrencyInput
-                control={formMethods.control}
                 name="initialBalance"
+                control={formMethods.control}
               />
             </div>
           </div>
@@ -45,7 +45,12 @@ export function NewAccountModal() {
               placeholder="Nome da conta"
               control={formMethods.control}
             />
-            <Select placeholder="Tipo" options={ACCOUNT_OPTIONS} />
+            <Select
+              name="type"
+              placeholder="Tipo"
+              options={ACCOUNT_OPTIONS}
+              control={formMethods.control}
+            />
             <ColorsDropdownInput />
           </div>
 

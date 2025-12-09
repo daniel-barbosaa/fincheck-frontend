@@ -14,6 +14,7 @@ export function useNewAccountModalController() {
     defaultValues: {
       initialBalance: "12",
       name: "Nubank",
+      type: "CHECKING",
     },
   });
 

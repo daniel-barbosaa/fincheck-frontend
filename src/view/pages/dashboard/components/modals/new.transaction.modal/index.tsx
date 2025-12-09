@@ -1,4 +1,3 @@
-import { ACCOUNT_OPTIONS } from "../../../../../../app/types/account";
 import { Button } from "../../../../../components/ui/button";
 
 import { DateInput } from "../../../../../components/ui/date-input";
@@ -6,7 +5,6 @@ import { Input } from "../../../../../components/ui/input";
 
 import { Modal } from "../../../../../components/ui/modal";
 
-import { Select } from "../../../../../components/ui/select";
 import { useNewTransactionModalController } from "./use-new-transaction-modal-controller";
 
 export function NewTransactionModal() {
@@ -41,11 +39,11 @@ export function NewTransactionModal() {
               name="name"
               placeholder={isExpense ? "Nome da despesa" : "Nome da receita"}
             />
-            <Select placeholder="Categoria" options={ACCOUNT_OPTIONS} />
+            {/* <Select placeholder="Categoria" options={ACCOUNT_OPTIONS} />
             <Select
               placeholder={isExpense ? "Pagar com" : "Receber na conta"}
               options={ACCOUNT_OPTIONS}
-            />
+            /> */}
             <DateInput />
           </div>
 
