@@ -22,9 +22,9 @@ const DashboardContext = createContext({} as DashboardContextValue);
 
 export function DashboardProvider({ children }: { children: ReactNode }) {
   const [valueVisible, setAreValuesVisible] = useState(true);
-  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
+  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(true);
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
-    useState(true);
+    useState(false);
   const [newTransactionType, setNewTransactionType] =
     useState<TransactionType | null>(null);
   const { valuesVisibleKey } = STORAGE_KEYS;

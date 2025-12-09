@@ -1,7 +1,6 @@
 import { ACCOUNT_OPTIONS } from "../../../../../../app/types/account";
 import { Button } from "../../../../../components/ui/button";
 
-import { CurrencyInput } from "../../../../../components/ui/currency-input";
 import { DateInput } from "../../../../../components/ui/date-input";
 import { Input } from "../../../../../components/ui/input";
 
@@ -33,7 +32,7 @@ export function NewTransactionModal() {
             </span>
             <div className="flex items-center gap-2">
               <span className="text-foreground/70 tracking-tight">R$</span>
-              <CurrencyInput />
+              {/* <CurrencyInput /> */}
             </div>
           </div>
           <div className="mt-10 flex flex-col gap-4">

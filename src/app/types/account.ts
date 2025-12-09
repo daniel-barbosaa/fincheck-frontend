@@ -9,3 +9,5 @@ export const ACCOUNT = {
 export type Accountype = keyof typeof ACCOUNT;
 
 export const ACCOUNT_OPTIONS = convertObjectToOptions(ACCOUNT);
+
+export const ACCOUNT_ENUM = Object.keys(ACCOUNT) as [Accountype];

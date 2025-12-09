@@ -2,15 +2,21 @@ import { ACCOUNT_OPTIONS } from "../../../../../../app/types/account";
 import { Button } from "../../../../../components/ui/button";
 import { ColorsDropdownInput } from "../../../../../components/ui/colors-input";
 import { CurrencyInput } from "../../../../../components/ui/currency-input";
-import { Input } from "../../../../../components/ui/input";
+
+import { InputText } from "../../../../../components/ui/input-text";
 import { Modal } from "../../../../../components/ui/modal";
 import { Select } from "../../../../../components/ui/select";
 
 import { useNewAccountModalController } from "./use-new-account-modal-controller";
 
 export function NewAccountModal() {
-  const { isNewAccountModalOpen, closeNewAccountModal } =
-    useNewAccountModalController();
+  const {
+    isNewAccountModalOpen,
+    closeNewAccountModal,
+    handleSubmit,
+    formMethods,
+  } = useNewAccountModalController();
+
   return (
     <Modal.Root
       open={isNewAccountModalOpen}
@@ -18,18 +24,27 @@ export function NewAccountModal() {
     >
       <Modal.Content>
         <Modal.Header>Nova Conta</Modal.Header>
-        <form>
+
+        <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
           <div>
             <span className="text-foreground/70 text-xs tracking-tight">
               Saldo
             </span>
             <div className="flex items-center gap-2">
               <span className="text-foreground/70 tracking-tight">R$</span>
-              <CurrencyInput />
+              <CurrencyInput
+                control={formMethods.control}
+                name="initialBalance"
+              />
             </div>
           </div>
           <div className="mt-10 flex flex-col gap-4">
-            <Input type="text" name="name" placeholder="Nome da conta" />
+            <InputText
+              name="name"
+              type="text"
+              placeholder="Nome da conta"
+              control={formMethods.control}
+            />
             <Select placeholder="Tipo" options={ACCOUNT_OPTIONS} />
             <ColorsDropdownInput />
           </div>
