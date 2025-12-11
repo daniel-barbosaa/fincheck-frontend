@@ -18,10 +18,11 @@ export function Accounts() {
     sliderState,
     windowWidth,
     toggleValuesVisibility,
-    areValuesVisible,
+    valueVisible,
     isLoading,
     accounts,
     openNewAccountModal,
+    currentBalance,
   } = useAccountsController();
 
   return (
@@ -39,17 +40,17 @@ export function Accounts() {
               <strong
                 className={cn(
                   "block text-2xl tracking-tight text-white",
-                  !areValuesVisible && "blur-md",
+                  !valueVisible && "blur-md",
                 )}
               >
-                {formatCurrency(1000)}
+                {formatCurrency(currentBalance)}
               </strong>
 
               <button
                 className="flex size-8 items-center justify-center"
                 onClick={toggleValuesVisibility}
               >
-                <EyeIcon open={!areValuesVisible} />
+                <EyeIcon open={!valueVisible} />
               </button>
             </div>
           </div>
@@ -100,12 +101,14 @@ export function Accounts() {
                   />
                 </div>
 
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <SwiperSlide key={i}>
+                {accounts.map((account) => (
+                  <SwiperSlide key={account.id}>
                     <AccountCard
-                      name="Nubank"
-                      type="checking"
-                      currencyValue={1000}
+                      valueVisible={valueVisible}
+                      name={account.name}
+                      type={account.type}
+                      color={account.color}
+                      currencyValue={account.currentBalance}
                     />
                   </SwiperSlide>
                 ))}

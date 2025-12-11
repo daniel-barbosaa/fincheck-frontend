@@ -15,6 +15,7 @@ export function NewAccountModal() {
     closeNewAccountModal,
     handleSubmit,
     formMethods,
+    isPending,
   } = useNewAccountModalController();
 
   return (
@@ -53,7 +54,7 @@ export function NewAccountModal() {
             <ColorsDropdownInput name="color" control={formMethods.control} />
           </div>
 
-          <Button className="mt-6 w-full" type="submit">
+          <Button className="mt-6 w-full" type="submit" isLoading={isPending}>
             Criar
           </Button>
         </form>

@@ -3,7 +3,7 @@ import { CheckingIcon } from "./checking-icon";
 import { InvestmentIcon } from "./investment-icon";
 
 export const iconsMap = {
-  checking: CheckingIcon,
-  investment: InvestmentIcon,
-  cash: CashIcon,
+  CHECKING: CheckingIcon,
+  INVESTMENT: InvestmentIcon,
+  CASH: CashIcon,
 };

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDashboard } from "../../dashboard-context/use-dashboard";
 
 export function useTransactionsController() {
-  const { areValuesVisible } = useDashboard();
+  const { valueVisible } = useDashboard();
 
   const [isFiltersModalOpen, setIsFilterModalOpen] = useState<boolean>(false);
 
@@ -14,7 +14,7 @@ export function useTransactionsController() {
   }
 
   return {
-    areValuesVisible,
+    valueVisible,
     isInitialLoading: false,
     transaction: [],
     isLoading: false,

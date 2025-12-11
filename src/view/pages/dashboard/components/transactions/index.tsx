@@ -15,7 +15,7 @@ import { TransactionTypeDropdown } from "./transaction-type-dropdown";
 import { FiltersModal } from "./filters-modal";
 export function Transactions() {
   const {
-    areValuesVisible,
+    valueVisible,
     isLoading,
     transaction,
     isInitialLoading,
@@ -97,7 +97,7 @@ export function Transactions() {
                   <span
                     className={cn(
                       "font-medium tracking-tighter text-red-800",
-                      !areValuesVisible && "blur-sm",
+                      !valueVisible && "blur-sm",
                     )}
                   >
                     {formatCurrency(30.52)}
@@ -119,7 +119,7 @@ export function Transactions() {
                   <span
                     className={cn(
                       "font-medium tracking-tighter text-green-800",
-                      !areValuesVisible && "blur-sm",
+                      !valueVisible && "blur-sm",
                     )}
                   >
                     {formatCurrency(30.52)}

@@ -7,7 +7,7 @@ import { STORAGE_KEYS } from "../../../../app/constants/storage-keys";
 import type { TransactionType } from "../../../../app/types/transaction";
 
 interface DashboardContextValue {
-  areValuesVisible: boolean;
+  valueVisible: boolean;
   isNewTransactionModalOpen: boolean;
   isNewAccountModalOpen: boolean;
   newTransactionType: TransactionType | null;
@@ -21,19 +21,22 @@ interface DashboardContextValue {
 const DashboardContext = createContext({} as DashboardContextValue);
 
 export function DashboardProvider({ children }: { children: ReactNode }) {
-  const [valueVisible, setAreValuesVisible] = useState(true);
-  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(true);
+  const [valueVisible, setAreValuesVisible] = useState(() => {
+    return getStorageItem<boolean>(STORAGE_KEYS.valuesVisibleKey) ?? true;
+  });
+  const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
     useState(false);
   const [newTransactionType, setNewTransactionType] =
     useState<TransactionType | null>(null);
-  const { valuesVisibleKey } = STORAGE_KEYS;
-  const areValuesVisible = getStorageItem(valuesVisibleKey) as boolean;
 
   const toggleValuesVisibility = useCallback(() => {
-    setAreValuesVisible((prevState) => !prevState);
-    setStorageItem(valuesVisibleKey, valueVisible);
-  }, [valueVisible, valuesVisibleKey]);
+    setAreValuesVisible((prev) => {
+      const update = !prev;
+      setStorageItem(STORAGE_KEYS.valuesVisibleKey, update);
+      return update;
+    });
+  }, []);
 
   const openNewAccountModal = useCallback(() => {
     setIsNewAccountModalOpen(true);
@@ -54,8 +57,7 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
   return (
     <DashboardContext.Provider
       value={{
-        toggleValuesVisibility,
-        areValuesVisible,
+        valueVisible,
         openNewAccountModal,
         isNewAccountModalOpen,
         closeNewAccountModal,
@@ -63,6 +65,7 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
         closeNewTransactionModal,
         isNewTransactionModalOpen,
         newTransactionType,
+        toggleValuesVisibility,
       }}
     >
       {children}

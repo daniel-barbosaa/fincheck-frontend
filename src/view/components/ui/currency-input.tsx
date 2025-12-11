@@ -26,9 +26,12 @@ export function CurrencyInput<T extends FieldValues>({
             <NumericFormat
               thousandSeparator="."
               decimalSeparator=","
+              decimalScale={2}
               className="text-foreground/90 w-full text-[32px] font-bold tracking-tight outline-none"
-              onChange={onChange}
               value={value}
+              onValueChange={(values) => {
+                onChange(values.value);
+              }}
             />
             <FieldError error={showMessage} />
           </div>

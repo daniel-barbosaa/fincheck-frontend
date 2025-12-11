@@ -10,9 +10,9 @@ export const newAccountFormSchema = z.object({
 
 export type NewAccountFormSchema = z.infer<typeof newAccountFormSchema>;
 
-export const signInFormDefaultValues: NewAccountFormSchema = {
-  initialBalance: "",
+export const newAccountFormDefaultValues: NewAccountFormSchema = {
+  initialBalance: "0",
   name: "",
-  type: "CASH",
+  type: "CHECKING",
   color: "",
 };

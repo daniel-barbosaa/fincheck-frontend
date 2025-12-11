@@ -2,20 +2,27 @@ import { cn } from "../../../../../app/utils/class-name-merge";
 import { formatCurrency } from "../../../../../app/utils/formatters/format-currency";
 import { Card } from "../../../../components/ui/card";
 import { BankAccountTypeIcon } from "../../../../components/icons/bank-account-type-icon";
-import { useAccountsController } from "./use-accounts-controller";
+import type { Accountype } from "../../../../../app/types/account";
 
 interface AccountCardProps {
   name: string;
   currencyValue: number;
-  type: "cash" | "checking" | "investment";
+  type: Accountype;
+  color: string;
+  valueVisible: boolean;
 }
 
-export function AccountCard({ currencyValue, name, type }: AccountCardProps) {
-  const { areValuesVisible } = useAccountsController();
+export function AccountCard({
+  currencyValue,
+  name,
+  type,
+  color,
+  valueVisible,
+}: AccountCardProps) {
   return (
     <Card
       className="flex h-50 flex-col justify-between border-b-4 border-amber-700 p-4"
-      style={{ borderColor: "#f4ff32" }}
+      style={{ borderColor: color }}
     >
       <div>
         <BankAccountTypeIcon type={type} />
@@ -27,7 +34,7 @@ export function AccountCard({ currencyValue, name, type }: AccountCardProps) {
         <span
           className={cn(
             "text-foreground/90 block font-medium tracking-tighter",
-            !areValuesVisible && "blur-sm",
+            !valueVisible && "blur-sm",
           )}
         >
           {formatCurrency(currencyValue)}

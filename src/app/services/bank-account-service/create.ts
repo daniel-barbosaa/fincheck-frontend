@@ -9,6 +9,6 @@ export interface BanckAccountParams {
 }
 
 export async function create(params: BanckAccountParams) {
-  const { data } = await api.post("/bank-account", params);
+  const { data } = await api.post("/bank-accounts", params);
   return data;
 }
