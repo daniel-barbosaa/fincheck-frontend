@@ -23,6 +23,7 @@ export function Accounts() {
     accounts,
     openNewAccountModal,
     currentBalance,
+    openEditAccountModal,
   } = useAccountsController();
 
   return (
@@ -109,6 +110,7 @@ export function Accounts() {
                       type={account.type}
                       color={account.color}
                       currencyValue={account.currentBalance}
+                      onOpen={() => openEditAccountModal(account)}
                     />
                   </SwiperSlide>
                 ))}

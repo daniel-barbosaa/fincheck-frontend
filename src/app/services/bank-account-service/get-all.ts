@@ -1,14 +1,7 @@
-import type { Accountype } from "../../types/account";
+import type { BankAccount } from "../../types/bank-account";
 import { api } from "../api";
 
-type BanckAccountResponse = Array<{
-  id: string;
-  name: string;
-  initialBalance: number;
-  type: Accountype;
-  color: string;
-  currentBalance: number;
-}>;
+type BanckAccountResponse = Array<BankAccount>;
 
 export async function getAll() {
   const { data } = await api.get<BanckAccountResponse>("/bank-accounts");

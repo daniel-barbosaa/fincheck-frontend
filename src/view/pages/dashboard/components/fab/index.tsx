@@ -6,7 +6,7 @@ import { DropdownMenuItem } from "../../../../components/dropdown/item";
 
 import { BankAccountIcon } from "../../../../components/icons/bank-account-icon";
 import { CategoryIcon } from "../../../../components/icons/categories/category-icon";
-import { useDashboard } from "../../dashboard-context/use-dashboard";
+import { useDashboard } from "../../dashboard-context";
 
 export function Fab() {
   const { openNewAccountModal, openNewTransactionModal } = useDashboard();

@@ -10,6 +10,7 @@ interface AccountCardProps {
   type: Accountype;
   color: string;
   valueVisible: boolean;
+  onOpen(): void;
 }
 
 export function AccountCard({
@@ -18,11 +19,13 @@ export function AccountCard({
   type,
   color,
   valueVisible,
+  onOpen,
 }: AccountCardProps) {
   return (
     <Card
       className="flex h-50 flex-col justify-between border-b-4 border-amber-700 p-4"
       style={{ borderColor: color }}
+      onClick={onOpen}
     >
       <div>
         <BankAccountTypeIcon type={type} />

@@ -1,4 +1,4 @@
-import { useDashboard } from "../../../dashboard-context/use-dashboard";
+import { useDashboard } from "../../../dashboard-context";
 
 export function useNewTransactionModalController() {
   const {
