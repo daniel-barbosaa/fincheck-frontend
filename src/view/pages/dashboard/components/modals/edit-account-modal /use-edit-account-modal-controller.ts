@@ -5,25 +5,43 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   editAccountFormSchema,
   type EditAccountFormSchema,
-  editAccountFormDefaultValues,
 } from "./edit-account-schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { bankAccountService } from "../../../../../../app/services/bank-account-service";
-import type { BanckAccountParams } from "../../../../../../app/services/bank-account-service/create";
 import toast from "react-hot-toast";
 import { QUERY_CACHE_KEYS } from "../../../../../../app/constants/cache";
 import { useDashboard } from "../../../dashboard-context";
+import { type UpdateBankAccountParams } from "../../../../../../app/services/bank-account-service/update";
+import { useEffect } from "react";
 
 export function useEditAccountModalController() {
-  const { isEditAccountModalOpen, closeEditAccountModal } = useDashboard();
+  const { isEditAccountModalOpen, closeEditAccountModal, accountBeingEdit } =
+    useDashboard();
   const formMethods = useForm<EditAccountFormSchema>({
     resolver: zodResolver(editAccountFormSchema),
-    defaultValues: editAccountFormDefaultValues,
+    defaultValues: {
+      color: accountBeingEdit?.color,
+      name: accountBeingEdit?.name,
+      type: accountBeingEdit?.type,
+      initialBalance: accountBeingEdit?.initialBalance,
+    },
   });
+  const { reset } = formMethods;
+
+  useEffect(() => {
+    if (accountBeingEdit) {
+      reset({
+        color: accountBeingEdit?.color,
+        name: accountBeingEdit?.name,
+        type: accountBeingEdit?.type,
+        initialBalance: accountBeingEdit?.initialBalance,
+      });
+    }
+  }, [accountBeingEdit, reset]);
 
   const { isPending, mutateAsync } = useMutation({
-    mutationFn: async (data: BanckAccountParams) => {
-      return bankAccountService.create(data);
+    mutationFn: async (data: UpdateBankAccountParams) => {
+      return bankAccountService.update(data);
     },
   });
   const queryClient = useQueryClient();
@@ -33,15 +51,15 @@ export function useEditAccountModalController() {
       await mutateAsync({
         ...data,
         initialBalance: Number(data.initialBalance),
+        id: accountBeingEdit!.id,
       });
       queryClient.invalidateQueries({
         queryKey: [QUERY_CACHE_KEYS.bankAccounts],
       });
-      toast.success("Conta foi cadastrada com sucesso!");
+      toast.success("Conta editada com sucesso!");
       closeEditAccountModal();
-      formMethods.reset();
     } catch {
-      toast.error("Erro ao cadastrar a conta!");
+      toast.error("Erro ao editar a conta!");
     }
   }
 

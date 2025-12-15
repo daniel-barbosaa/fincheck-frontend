@@ -55,7 +55,7 @@ export function EditAccountModal() {
           </div>
 
           <Button className="mt-6 w-full" type="submit" isLoading={isPending}>
-            Criar
+            Salvar
           </Button>
         </form>
       </Modal.Content>

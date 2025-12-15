@@ -29,19 +29,21 @@ interface DashboardContextValue {
   closeEditAccountModal(): void;
 }
 
-const DashboardContext = createContext({} as DashboardContextValue);
+export const DashboardContext = createContext({} as DashboardContextValue);
 
 export function DashboardProvider({ children }: { children: ReactNode }) {
   const [valueVisible, setAreValuesVisible] = useState(() => {
     return getStorageItem<boolean>(STORAGE_KEYS.valuesVisibleKey) ?? true;
   });
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
-  const [isEditAccountModalOpen, setIsEditAccountModalOpen] = useState(true);
+  const [isEditAccountModalOpen, setIsEditAccountModalOpen] = useState(false);
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
     useState(false);
   const [accountBeingEdit, setAccountBeingEdit] = useState<null | BankAccount>(
     null,
   );
+
+  console.log(accountBeingEdit);
   const [newTransactionType, setNewTransactionType] =
     useState<TransactionType | null>(null);
 
@@ -73,11 +75,10 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
     setIsEditAccountModalOpen(true);
     setAccountBeingEdit(account);
   }, []);
+
   const closeEditAccountModal = useCallback(() => {
     setIsEditAccountModalOpen(false);
   }, []);
-
-  console.log(accountBeingEdit);
 
   return (
     <DashboardContext.Provider

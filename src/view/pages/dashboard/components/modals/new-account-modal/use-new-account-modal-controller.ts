@@ -9,7 +9,7 @@ import {
 } from "./new-account-schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { bankAccountService } from "../../../../../../app/services/bank-account-service";
-import type { BanckAccountParams } from "../../../../../../app/services/bank-account-service/create";
+import { type CreateBankAccountParams } from "../../../../../../app/services/bank-account-service/create";
 import toast from "react-hot-toast";
 import { QUERY_CACHE_KEYS } from "../../../../../../app/constants/cache";
 import { useDashboard } from "../../../dashboard-context";
@@ -22,7 +22,7 @@ export function useNewAccountModalController() {
   });
 
   const { isPending, mutateAsync } = useMutation({
-    mutationFn: async (data: BanckAccountParams) => {
+    mutationFn: async (data: CreateBankAccountParams) => {
       return bankAccountService.create(data);
     },
   });
