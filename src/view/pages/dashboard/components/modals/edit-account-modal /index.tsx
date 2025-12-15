@@ -1,4 +1,7 @@
 import { ACCOUNT_OPTIONS } from "../../../../../../app/types/account";
+import { ConfirmDeleteModal } from "../../../../../components/confirm-delete-modal";
+import { TrashIcon } from "../../../../../components/icons/trash-icon";
+
 import { Button } from "../../../../../components/ui/button";
 import { ColorsDropdownInput } from "../../../../../components/ui/colors-input";
 import { CurrencyInput } from "../../../../../components/ui/currency-input";
@@ -16,7 +19,20 @@ export function EditAccountModal() {
     handleSubmit,
     formMethods,
     isPending,
+    handleCloseDeleteModal,
+    handleOpenDeleteModal,
+    isDeleteModalOpen,
   } = useEditAccountModalController();
+
+  if (isDeleteModalOpen) {
+    return (
+      <ConfirmDeleteModal
+        title="Tem certeza que deseja excluir esta conta?"
+        description="Ao excluir a conta, também serão excluídos todos os registros de receita e despesas relacionados."
+        onClose={handleCloseDeleteModal}
+      />
+    );
+  }
 
   return (
     <Modal.Root
@@ -24,7 +40,11 @@ export function EditAccountModal() {
       onOpenChange={closeEditAccountModal}
     >
       <Modal.Content>
-        <Modal.Header>Editar Conta</Modal.Header>
+        <Modal.Header
+          rightAction={<TrashButton onOpen={handleOpenDeleteModal} />}
+        >
+          Editar Conta
+        </Modal.Header>
 
         <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
           <div>
@@ -60,5 +80,16 @@ export function EditAccountModal() {
         </form>
       </Modal.Content>
     </Modal.Root>
+  );
+}
+
+interface TrashButtonProps {
+  onOpen?(): void;
+}
+export function TrashButton({ onOpen }: TrashButtonProps) {
+  return (
+    <button onClick={onOpen}>
+      <TrashIcon className="size-6 text-red-900" />
+    </button>
   );
 }

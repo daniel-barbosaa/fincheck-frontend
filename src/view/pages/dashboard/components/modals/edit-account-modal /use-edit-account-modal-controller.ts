@@ -12,11 +12,12 @@ import toast from "react-hot-toast";
 import { QUERY_CACHE_KEYS } from "../../../../../../app/constants/cache";
 import { useDashboard } from "../../../dashboard-context";
 import { type UpdateBankAccountParams } from "../../../../../../app/services/bank-account-service/update";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function useEditAccountModalController() {
   const { isEditAccountModalOpen, closeEditAccountModal, accountBeingEdit } =
     useDashboard();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(true);
   const formMethods = useForm<EditAccountFormSchema>({
     resolver: zodResolver(editAccountFormSchema),
     defaultValues: {
@@ -63,11 +64,21 @@ export function useEditAccountModalController() {
     }
   }
 
+  function handleOpenDeleteModal() {
+    setIsDeleteModalOpen(true);
+  }
+  function handleCloseDeleteModal() {
+    setIsDeleteModalOpen(false);
+  }
+
   return {
     isEditAccountModalOpen,
     closeEditAccountModal,
     formMethods,
     handleSubmit,
     isPending,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    isDeleteModalOpen,
   };
 }
