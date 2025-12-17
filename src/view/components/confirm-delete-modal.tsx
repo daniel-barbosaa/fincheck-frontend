@@ -5,11 +5,15 @@ interface ConfirmDeleteModalProps {
   onClose?(): void;
   title: string;
   description: string;
+  onConfirm(): void;
+  isLoading: boolean;
 }
 export function ConfirmDeleteModal({
   onClose,
   title,
   description,
+  onConfirm,
+  isLoading,
 }: ConfirmDeleteModalProps) {
   return (
     <Modal.Root open onOpenChange={onClose}>
@@ -27,7 +31,13 @@ export function ConfirmDeleteModal({
           )}
         </div>
         <div className="flex flex-col gap-4">
-          <Button variant="destructive">Sim, desejo excluir</Button>
+          <Button
+            variant="destructive"
+            onClick={onConfirm}
+            isLoading={isLoading}
+          >
+            Sim, desejo excluir
+          </Button>
           <Button variant="outline" onClick={onClose}>
             Cancelar
           </Button>

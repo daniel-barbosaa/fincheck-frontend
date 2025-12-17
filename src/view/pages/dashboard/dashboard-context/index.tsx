@@ -43,7 +43,6 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
     null,
   );
 
-  console.log(accountBeingEdit);
   const [newTransactionType, setNewTransactionType] =
     useState<TransactionType | null>(null);
 
