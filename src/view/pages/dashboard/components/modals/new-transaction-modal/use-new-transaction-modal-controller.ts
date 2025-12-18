@@ -6,14 +6,15 @@ import {
   type NewTransactionFormSchema,
 } from "./new-tansaction-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { QUERY_CACHE_KEYS } from "../../../../../../app/constants/cache";
-import { bankAccountService } from "../../../../../../app/services/bank-account-service";
-import { categoriesService } from "../../../../../../app/services/categories-service";
+
 import { useMemo } from "react";
 import type { CreateTransactionsParams } from "../../../../../../app/services/transactions-service/create";
 import { transactionsServices } from "../../../../../../app/services/transactions-service";
 import toast from "react-hot-toast";
+import { useBankAccounts } from "../../../../../../app/hooks/use-bank-accounts";
+import { useCategories } from "../../../../../../app/hooks/use-categories";
 
 export function useNewTransactionModalController() {
   const {
@@ -26,15 +27,8 @@ export function useNewTransactionModalController() {
     defaultValues: newTransactionFormDefaultValues,
   });
 
-  const { data: bankAccounts = [], isFetching: isLoadingBankAccounts } =
-    useQuery({
-      queryKey: [QUERY_CACHE_KEYS.bankAccounts],
-      queryFn: bankAccountService.getAll,
-    });
-  const { data: categories = [], isFetching: isLoadingCategories } = useQuery({
-    queryKey: [QUERY_CACHE_KEYS.categories],
-    queryFn: categoriesService.getAll,
-  });
+  const { accounts, isLoading: isLoadingBankAccounts } = useBankAccounts();
+  const { categories, isLoading: isLoadingCategories } = useCategories();
 
   const categoriesFiltered = useMemo(() => {
     return categories.filter(
@@ -49,7 +43,7 @@ export function useNewTransactionModalController() {
   });
   const queryClient = useQueryClient();
 
-  const allAccountsOption = bankAccounts.map((account) => ({
+  const allAccountsOption = accounts.map((account) => ({
     value: account.id,
     label: account.name,
   }));
@@ -68,6 +62,10 @@ export function useNewTransactionModalController() {
       queryClient.invalidateQueries({
         queryKey: [QUERY_CACHE_KEYS.transactions],
       });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_CACHE_KEYS.bankAccounts],
+      });
+
       toast.success(
         newTransactionType === "EXPENSE"
           ? "Despesa cadastrada com sucesso!"
