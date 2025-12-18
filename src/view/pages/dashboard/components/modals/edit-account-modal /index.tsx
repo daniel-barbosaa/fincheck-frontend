@@ -53,7 +53,7 @@ export function EditAccountModal() {
         <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
           <div>
             <span className="text-foreground/70 text-xs tracking-tight">
-              Saldo
+              Saldo inicial
             </span>
             <div className="flex items-center gap-2">
               <span className="text-foreground/70 tracking-tight">R$</span>

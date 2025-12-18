@@ -10,6 +10,7 @@ import {
   type FieldPath,
   type FieldValues,
 } from "react-hook-form";
+import { Spinner } from "./spinner";
 
 type SelectOptions = {
   value: string;
@@ -25,6 +26,7 @@ interface RequiredSelectProps {
 type SelectProps<T extends FieldValues> = RequiredSelectProps & {
   name: FieldPath<T>;
   control: Control<T>;
+  isLoading?: boolean;
 };
 
 export function Select<T extends FieldValues>({
@@ -33,6 +35,7 @@ export function Select<T extends FieldValues>({
   options,
   control,
   name,
+  isLoading,
 }: SelectProps<T>) {
   return (
     <Controller
@@ -58,17 +61,25 @@ export function Select<T extends FieldValues>({
               >
                 {placeholder}
               </label>
-              <SelectPrimitive.Root value={value} onValueChange={handleSelect}>
+              <SelectPrimitive.Root
+                value={value}
+                onValueChange={handleSelect}
+                disabled={isLoading}
+              >
                 <SelectPrimitive.Trigger
                   className={cn(
-                    "relative h-13 w-full rounded-lg border border-gray-500 bg-white px-3 pt-4 text-left text-gray-800 transition-all outline-none focus:border-gray-800",
+                    "relative h-13 w-full rounded-lg border border-gray-500 bg-white px-3 pt-4 text-left text-gray-800 transition-all outline-none focus:border-gray-800 disabled:bg-gray-100",
                     className,
                     showMessage && "!border-red-900",
                   )}
                 >
                   <SelectPrimitive.Value />
                   <SelectPrimitive.Icon className="absolute top-1/2 right-3 -translate-y-1/2">
-                    <ChevronDownIcon className="text-foreground/90 size-6" />
+                    {!isLoading ? (
+                      <ChevronDownIcon className="text-foreground/90 size-6" />
+                    ) : (
+                      <Spinner clasName="size-4" />
+                    )}
                   </SelectPrimitive.Icon>
                 </SelectPrimitive.Trigger>
 
