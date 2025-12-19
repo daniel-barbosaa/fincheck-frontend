@@ -2,7 +2,7 @@ import type { Transaction } from "../../types/transaction";
 import { api } from "../api";
 
 type TransactionsResponse = Array<Transaction>;
-type TransactionsFilters = {
+export type TransactionsFilters = {
   month: number;
   year: number;
   bankAccountId?: string;

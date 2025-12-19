@@ -1,36 +1,31 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { Modal } from "../../../../../components/ui/modal";
 import { Button } from "../../../../../components/ui/button";
-import { useFiltersModal } from "./use-filters-modal";
+import { useFiltersModal } from "./use-filters-modal-controller";
 import { cn } from "../../../../../../app/utils/class-name-merge";
 
 interface FiltersModalProps {
   open: boolean;
   onOpenChange?(): void;
+  onApplyFilters(filters: {
+    bankAccountId: string | undefined;
+    year: number;
+  }): void;
 }
 
-const mockedAccounts = [
-  {
-    id: "1",
-    name: "Nubank",
-  },
-  {
-    id: "2",
-    name: "Inter",
-  },
-  {
-    id: "3",
-    name: "XP Investimentos",
-  },
-];
-
-export function FiltersModal({ onOpenChange, open }: FiltersModalProps) {
+export function FiltersModal({
+  onOpenChange,
+  open,
+  onApplyFilters,
+}: FiltersModalProps) {
   const {
     handleSelectBankAccount,
     selectedBankAccountId,
     selectedYear,
     handleChangeYear,
+    accounts,
   } = useFiltersModal();
+
   return (
     <Modal.Root open={open} onOpenChange={onOpenChange}>
       <Modal.Content>
@@ -40,7 +35,7 @@ export function FiltersModal({ onOpenChange, open }: FiltersModalProps) {
             Conta
           </span>
           <div className="mt-2 space-y-2">
-            {mockedAccounts.map((account) => (
+            {accounts.map((account) => (
               <button
                 key={account.id}
                 onClick={() => handleSelectBankAccount(account.id)}
@@ -77,7 +72,17 @@ export function FiltersModal({ onOpenChange, open }: FiltersModalProps) {
             </button>
           </div>
         </div>
-        <Button className="mt-10 w-full">Aplicar Filtros</Button>
+        <Button
+          className="mt-10 w-full"
+          onClick={() =>
+            onApplyFilters({
+              bankAccountId: selectedBankAccountId,
+              year: selectedYear,
+            })
+          }
+        >
+          Aplicar Filtros
+        </Button>
       </Modal.Content>
     </Modal.Root>
   );
