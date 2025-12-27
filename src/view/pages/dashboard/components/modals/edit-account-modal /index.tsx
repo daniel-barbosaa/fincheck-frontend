@@ -1,6 +1,5 @@
 import { ACCOUNT_OPTIONS } from "../../../../../../app/types/account";
 import { ConfirmDeleteModal } from "../../../../../components/confirm-delete-modal";
-import { TrashIcon } from "../../../../../components/icons/trash-icon";
 
 import { Button } from "../../../../../components/ui/button";
 import { ColorsDropdownInput } from "../../../../../components/ui/colors-input";
@@ -9,6 +8,7 @@ import { CurrencyInput } from "../../../../../components/ui/currency-input";
 import { InputText } from "../../../../../components/ui/input-text";
 import { Modal } from "../../../../../components/ui/modal";
 import { Select } from "../../../../../components/ui/select";
+import { TrashButton } from "../../../../../components/ui/trash-button";
 
 import { useEditAccountModalController } from "./use-edit-account-modal-controller";
 
@@ -84,16 +84,5 @@ export function EditAccountModal() {
         </form>
       </Modal.Content>
     </Modal.Root>
-  );
-}
-
-interface TrashButtonProps {
-  onOpen?(): void;
-}
-export function TrashButton({ onOpen }: TrashButtonProps) {
-  return (
-    <button onClick={onOpen}>
-      <TrashIcon className="size-6 text-red-900" />
-    </button>
   );
 }

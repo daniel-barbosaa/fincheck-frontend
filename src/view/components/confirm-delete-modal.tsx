@@ -4,7 +4,7 @@ import { Modal } from "./ui/modal";
 interface ConfirmDeleteModalProps {
   onClose?(): void;
   title: string;
-  description: string;
+  description?: string;
   onConfirm(): void;
   isLoading: boolean;
 }

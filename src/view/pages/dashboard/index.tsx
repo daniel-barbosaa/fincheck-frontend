@@ -8,7 +8,7 @@ import { NewTransactionModal } from "./components/modals/new-transaction-modal";
 import { Transactions } from "./components/transactions";
 import { DashboardContext, DashboardProvider } from "./dashboard-context";
 
-export function Dashboard() {
+export default function Dashboard() {
   return (
     <DashboardProvider>
       <DashboardContext.Consumer>

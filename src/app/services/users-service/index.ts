@@ -1,5 +1,5 @@
 import { user } from "./user";
 
-export const usersService = {
+export const userService = {
   user,
 };

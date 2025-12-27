@@ -14,6 +14,7 @@ import emptyState from "../../../../../assets/empty-state.svg";
 import { TransactionTypeDropdown } from "./transaction-type-dropdown";
 import { FiltersModal } from "./filters-modal";
 import { formatDate } from "../../../../../app/utils/formatters/format-date";
+import { EditTransactionModal } from "./edit-transaction-modal ";
 export function Transactions() {
   const {
     valueVisible,
@@ -26,6 +27,10 @@ export function Transactions() {
     handleChangeFilters,
     filters,
     handleApplyFilters,
+    handleCloseEditModal,
+    handleOpenEditModal,
+    transactionBeingEdited,
+    isEditModalOpen,
   } = useTransactionsController();
   const hasTransactions = transactions.length > 0;
 
@@ -95,43 +100,54 @@ export function Transactions() {
               </div>
             )}
 
-            {hasTransactions &&
-              !isLoading &&
-              transactions.map((transaction) => (
-                <Card
-                  className="flex items-center justify-between gap-4 p-4"
-                  key={transaction.id}
-                >
-                  <div className="flex flex-1 items-center gap-3">
-                    <CategoryIcon
-                      type={
-                        transaction.type === "EXPENSE" ? "expense" : "income"
-                      }
-                      category={transaction.category?.icon}
-                    />
-                    <div>
-                      <strong className="block font-bold tracking-tighter capitalize">
-                        {transaction.name}
-                      </strong>
-                      <span className="text-foreground/60 text-sm">
-                        {formatDate(new Date(transaction.date))}
-                      </span>
-                    </div>
-                  </div>
-                  <span
-                    className={cn(
-                      "font-medium tracking-tighter",
-                      transaction.type === "EXPENSE"
-                        ? "text-red-800"
-                        : "text-green-800",
-                      !valueVisible && "blur-sm",
-                    )}
+            {hasTransactions && !isLoading && (
+              <>
+                {transactionBeingEdited && (
+                  <EditTransactionModal
+                    transaction={transactionBeingEdited}
+                    open={isEditModalOpen}
+                    onClose={handleCloseEditModal}
+                  />
+                )}
+                {transactions.map((transaction) => (
+                  <Card
+                    className="flex cursor-pointer items-center justify-between gap-4 p-4"
+                    key={transaction.id}
+                    role="button"
+                    onClick={() => handleOpenEditModal(transaction)}
                   >
-                    {transaction.type === "EXPENSE" ? "-" : "+"}
-                    {formatCurrency(transaction.value)}
-                  </span>
-                </Card>
-              ))}
+                    <div className="flex flex-1 items-center gap-3">
+                      <CategoryIcon
+                        type={
+                          transaction.type === "EXPENSE" ? "expense" : "income"
+                        }
+                        category={transaction.category?.icon}
+                      />
+                      <div>
+                        <strong className="block font-bold tracking-tighter capitalize">
+                          {transaction.name}
+                        </strong>
+                        <span className="text-foreground/60 text-sm">
+                          {formatDate(new Date(transaction.date))}
+                        </span>
+                      </div>
+                    </div>
+                    <span
+                      className={cn(
+                        "font-medium tracking-tighter",
+                        transaction.type === "EXPENSE"
+                          ? "text-red-800"
+                          : "text-green-800",
+                        !valueVisible && "blur-sm",
+                      )}
+                    >
+                      {transaction.type === "EXPENSE" ? "-" : "+"}
+                      {formatCurrency(transaction.value)}
+                    </span>
+                  </Card>
+                ))}
+              </>
+            )}
           </div>
         </>
       )}

@@ -1,9 +1,13 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { AuthGuard } from "./auth-guard";
-import { Login } from "../view/pages/login";
-import { Register } from "../view/pages/register";
-import { Dashboard } from "../view/pages/dashboard";
+
 import { AuthLayout } from "../view/layouts/auth-layout";
+import { lazy } from "react";
+
+const Login = lazy(() => import("../view/pages/login/index"));
+const Register = lazy(() => import("../view/pages/register/index"));
+const Dashboard = lazy(() => import("../view/pages/dashboard/index"));
+const Profile = lazy(() => import("../view/pages/profile/index"));
 
 export function Router() {
   return (
@@ -18,6 +22,7 @@ export function Router() {
 
         <Route element={<AuthGuard isPrivate />}>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>

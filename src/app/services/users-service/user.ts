@@ -1,9 +1,7 @@
+import type { User } from "../../types/User";
 import { api } from "../api";
 
-interface MeResponse {
-  name: string;
-  email: string;
-}
+type MeResponse = User;
 
 export async function user() {
   const { data } = await api.get<MeResponse>("/users/me");

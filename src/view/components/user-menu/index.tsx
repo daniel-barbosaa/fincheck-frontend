@@ -6,13 +6,15 @@ import { ExitIcon } from "@radix-ui/react-icons";
 import { useAuth } from "../../../app/hooks/use-auth";
 
 export function UserMenu() {
-  const { signout } = useAuth();
+  const { signout, user } = useAuth();
+
+  const name = user?.name.slice(0, 2);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <div className="flex size-12 items-center justify-center rounded-full border border-teal-100 bg-teal-50">
-          <span className="text-sm font-medium -tracking-tighter text-teal-900">
-            DA
+          <span className="text-sm font-medium -tracking-tighter text-teal-900 uppercase">
+            {name}
           </span>
         </div>
       </DropdownMenuTrigger>
@@ -23,6 +25,10 @@ export function UserMenu() {
           onSelect={signout}
         >
           Sair
+          <ExitIcon className="size-4" />
+        </DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center justify-between">
+          <a href="/profile">Perfil</a>
           <ExitIcon className="size-4" />
         </DropdownMenuItem>
       </DropdownMenuContent>

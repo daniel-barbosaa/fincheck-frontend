@@ -8,6 +8,8 @@ export type TransactionType = keyof typeof TRANSACTION;
 export type Transaction = {
   id: string;
   name: string;
+  categoryId: string;
+  bankAccountId: string;
   value: number;
   date: Date;
   type: TransactionType;
