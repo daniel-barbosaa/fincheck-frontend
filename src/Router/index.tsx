@@ -1,8 +1,9 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { AuthGuard } from "./auth-guard";
 
-import { AuthLayout } from "../view/layouts/auth-layout";
+import { PublicLayout } from "../view/layouts/public-layout";
 import { lazy } from "react";
+import { PrivateLayout } from "../view/layouts/private-layout";
 
 const Login = lazy(() => import("../view/pages/login/index"));
 const Register = lazy(() => import("../view/pages/register/index"));
@@ -14,15 +15,17 @@ export function Router() {
     <BrowserRouter>
       <Routes>
         <Route element={<AuthGuard isPrivate={false} />}>
-          <Route element={<AuthLayout />}>
+          <Route element={<PublicLayout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
         </Route>
 
         <Route element={<AuthGuard isPrivate />}>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route element={<PrivateLayout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

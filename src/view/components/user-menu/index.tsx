@@ -4,6 +4,7 @@ import { DropdownMenuContent } from "../dropdown/content";
 import { DropdownMenuItem } from "../dropdown/item";
 import { ExitIcon } from "@radix-ui/react-icons";
 import { useAuth } from "../../../app/hooks/use-auth";
+import { Link } from "react-router-dom";
 
 export function UserMenu() {
   const { signout, user } = useAuth();
@@ -28,7 +29,7 @@ export function UserMenu() {
           <ExitIcon className="size-4" />
         </DropdownMenuItem>
         <DropdownMenuItem className="flex items-center justify-between">
-          <a href="/profile">Perfil</a>
+          <Link to="/profile">Perfil</Link>
           <ExitIcon className="size-4" />
         </DropdownMenuItem>
       </DropdownMenuContent>

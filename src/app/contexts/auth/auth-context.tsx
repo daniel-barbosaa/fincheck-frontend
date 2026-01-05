@@ -16,13 +16,13 @@ import { useQuery } from "@tanstack/react-query";
 import { userService } from "../../services/users-service";
 
 import type { User } from "../../types/User";
+import { PageLoader } from "../../../view/components/ui/page-loader";
 
 interface AuthContextValue {
   signedIn: boolean;
   signin(accessToken: string): void;
   signout(): void;
   user: User | undefined;
-  isLoading: boolean;
 }
 
 const AuthContext = createContext({} as AuthContextValue);
@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return !!storedAccessToken;
   });
 
-  const { data, isError, isLoading } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ["user"],
     queryFn: userService.user,
     enabled: signedIn,
@@ -57,6 +57,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [isError, signout]);
 
+  const isBooting = signedIn && !data;
+
   return (
     <AuthContext.Provider
       value={{
@@ -64,10 +66,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         signin,
         signout,
         user: data,
-        isLoading,
       }}
     >
-      {children}
+      {isBooting ? <PageLoader /> : children}
     </AuthContext.Provider>
   );
 }
