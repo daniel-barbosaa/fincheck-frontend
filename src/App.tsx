@@ -3,6 +3,9 @@ import { Router } from "./Router";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./app/contexts/auth/auth-context";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ErrorBoundary } from "react-error-boundary";
+
+import { UnexpectedError } from "./view/components/states/unexpected-error";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,12 +18,14 @@ const queryClient = new QueryClient({
 
 export function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
-      <AuthProvider>
-        <Router />
-        <Toaster />
-      </AuthProvider>
-    </QueryClientProvider>
+    <ErrorBoundary fallback={<UnexpectedError />}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools />
+        <AuthProvider>
+          <Router />
+          <Toaster />
+        </AuthProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }

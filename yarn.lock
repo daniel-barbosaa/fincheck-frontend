@@ -3445,6 +3445,11 @@ react-dom@^19.1.1:
   dependencies:
     scheduler "^0.26.0"
 
+react-error-boundary@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-6.0.2.tgz#c4f5a18510cbe54874c23d759f19c99471816c9e"
+  integrity sha512-yvWErn55ag/ywZEFqYpXYX9rxIDPIabXIX25F184KY3F5Szk2x/cVieOflw5R47ltN3KzWOw82Lmlb4vNjyn9A==
+
 react-hook-form@^7.63.0:
   version "7.63.0"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.63.0.tgz#ff601754989bdd5cfc19fcbb02a3c0d4fbb29284"
