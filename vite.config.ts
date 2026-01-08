@@ -1,12 +1,32 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    visualizer({
+      filename: "dist/bundle-analysis.html",
+      template: "treemap",
+      gzipSize: true,
+      brotliSize: true,
+      open: true,
+    }),
+  ],
   server: {
     port: 3000,
     open: true,
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          sentry: ["@sentry/react"],
+        },
+      },
+    },
   },
 });

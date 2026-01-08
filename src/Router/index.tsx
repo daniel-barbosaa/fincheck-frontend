@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { AuthGuard } from "./auth-guard";
 
@@ -10,9 +11,11 @@ const Register = lazy(() => import("../view/pages/register/index"));
 const Dashboard = lazy(() => import("../view/pages/dashboard/index"));
 const Profile = lazy(() => import("../view/pages/profile/index"));
 
+const SentryBrowserRouter = Sentry.withSentryRouting(BrowserRouter);
+
 export function Router() {
   return (
-    <BrowserRouter>
+    <SentryBrowserRouter>
       <Routes>
         <Route element={<AuthGuard isPrivate={false} />}>
           <Route element={<PublicLayout />}>
@@ -28,6 +31,6 @@ export function Router() {
           </Route>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </SentryBrowserRouter>
   );
 }

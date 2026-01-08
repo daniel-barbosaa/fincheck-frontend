@@ -11,7 +11,7 @@ import { useDashboard } from "../../dashboard-context";
 export function Fab() {
   const { openNewAccountModal, openNewTransactionModal } = useDashboard();
   return (
-    <div className="fixed right-4 bottom-4">
+    <div className="fixed right-4 bottom-4 z-30">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button className="flex size-12 items-center justify-center rounded-full bg-teal-900 text-white">

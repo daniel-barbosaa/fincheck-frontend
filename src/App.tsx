@@ -3,8 +3,8 @@ import { Router } from "./Router";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./app/contexts/auth/auth-context";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ErrorBoundary } from "react-error-boundary";
 
+import * as Sentry from "@sentry/react";
 import { UnexpectedError } from "./view/components/states/unexpected-error";
 
 const queryClient = new QueryClient({
@@ -18,7 +18,7 @@ const queryClient = new QueryClient({
 
 export function App() {
   return (
-    <ErrorBoundary fallback={<UnexpectedError />}>
+    <Sentry.ErrorBoundary fallback={<UnexpectedError />}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
         <AuthProvider>
@@ -26,6 +26,6 @@ export function App() {
           <Toaster />
         </AuthProvider>
       </QueryClientProvider>
-    </ErrorBoundary>
+    </Sentry.ErrorBoundary>
   );
 }

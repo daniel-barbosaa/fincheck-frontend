@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Logo } from "../components/ui/logo";
 import { UserMenu } from "../components/user-menu";
-import { ErrorBoundary } from "react-error-boundary";
+import * as Sentry from "@sentry/react";
 import { UnexpectedError } from "../components/states/unexpected-error";
 
 export function PrivateLayout() {
@@ -12,9 +12,9 @@ export function PrivateLayout() {
         <UserMenu />
       </header>
       <main className="flex max-h-full flex-1 flex-col">
-        <ErrorBoundary fallback={<UnexpectedError />}>
+        <Sentry.ErrorBoundary fallback={<UnexpectedError />}>
           <Outlet />
-        </ErrorBoundary>
+        </Sentry.ErrorBoundary>
       </main>
     </div>
   );
