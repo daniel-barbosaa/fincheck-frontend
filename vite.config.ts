@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -15,6 +16,10 @@ export default defineConfig({
       brotliSize: true,
       open: true,
     }),
+    sentryVitePlugin({
+      org: "myprojects-ih",
+      project: "fincheck",
+    }),
   ],
   server: {
     port: 3000,
@@ -28,5 +33,6 @@ export default defineConfig({
         },
       },
     },
+    sourcemap: true,
   },
 });

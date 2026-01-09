@@ -6,17 +6,19 @@ import {
   type ReactNode,
 } from "react";
 
+import * as Sentry from "@sentry/react";
 import {
   getStorageItem,
   removeStorageItem,
   setStorageItem,
 } from "../../helpers/local-storage";
 import { STORAGE_KEYS } from "../../constants/storage-keys";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { userService } from "../../services/users-service";
 
 import type { User } from "../../types/User";
 import { PageLoader } from "../../../view/components/ui/page-loader";
+import Clarity from "@microsoft/clarity";
 
 interface AuthContextValue {
   signedIn: boolean;
@@ -32,30 +34,47 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const storedAccessToken = getStorageItem(STORAGE_KEYS.accessToken);
     return !!storedAccessToken;
   });
+  const queryClient = useQueryClient();
 
   const { data, isError } = useQuery({
-    queryKey: ["user"],
+    queryKey: ["user", signedIn],
     queryFn: userService.user,
     enabled: signedIn,
-    staleTime: Infinity,
+    staleTime: 5 * 60 * 1000,
   });
 
   const signin = useCallback((accessToken: string) => {
     setStorageItem(STORAGE_KEYS.accessToken, accessToken);
-
     setSignedIn(true);
   }, []);
 
   const signout = useCallback(() => {
     removeStorageItem(STORAGE_KEYS.accessToken);
     setSignedIn(false);
-  }, []);
+    queryClient.clear();
+
+    if (import.meta.env.PROD) {
+      Sentry.setUser(null);
+    }
+  }, [queryClient]);
 
   useEffect(() => {
     if (isError) {
       signout();
     }
-  }, [isError, signout]);
+  }, [isError, signout, queryClient]);
+
+  useEffect(() => {
+    if (import.meta.env.PROD) {
+      Sentry.setUser({
+        email: data?.email,
+      });
+
+      if (data?.email) {
+        Clarity.identify(data.email);
+      }
+    }
+  }, [data]);
 
   const isBooting = signedIn && !data;
 

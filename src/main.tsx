@@ -5,6 +5,7 @@ import { App } from "./App";
 
 import "../src/app/utils/lazy-with-reload";
 import "../src/app/lib/sentry";
+import "../src/app/lib/clarity";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
