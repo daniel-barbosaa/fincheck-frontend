@@ -19,6 +19,9 @@ export default defineConfig({
     sentryVitePlugin({
       org: "myprojects-ih",
       project: "fincheck",
+      sourcemaps: {
+        filesToDeleteAfterUpload: ["**/*.map"]
+      }
     }),
   ],
   server: {
