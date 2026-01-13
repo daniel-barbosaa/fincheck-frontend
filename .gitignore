@@ -26,3 +26,6 @@ daily.md
 *.sw?
 
 
+
+# Sentry Config File
+.env.sentry-build-plugin

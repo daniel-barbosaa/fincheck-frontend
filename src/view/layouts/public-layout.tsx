@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import illustration from "../../assets/Login.png";
-import { Logo } from "../components/logo";
+import illustration from "../../assets/login.svg";
+import { Logo } from "../components/ui/logo";
 
-export function AuthLayout() {
+export function PublicLayout() {
   return (
     <div className="flex h-full w-full">
       <div className="flex h-full w-full flex-col items-center justify-center gap-y-16 lg:w-1/2">

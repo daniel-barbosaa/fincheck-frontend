@@ -1,6 +1,7 @@
 import { forwardRef, type ComponentProps } from "react";
-import { CrossCircledIcon } from "@radix-ui/react-icons";
-import { cn } from "../../app/utils/class-name-merge";
+
+import { cn } from "../../../app/utils/class-name-merge";
+import { FieldError } from "./field-error";
 interface InputProps extends ComponentProps<"input"> {
   name: string;
   error?: string;
@@ -29,12 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         >
           {placeholder}
         </label>
-        {error && (
-          <div className="mt-2 flex items-center gap-2 text-xs text-red-900">
-            <CrossCircledIcon />
-            <span>{error}</span>
-          </div>
-        )}
+        <FieldError error={error} />
       </div>
     );
   },

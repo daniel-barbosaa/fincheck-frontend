@@ -1,10 +1,10 @@
-import { Button } from "../../components/button";
-import { Input } from "../../components/input";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
 
 import { AuthForm } from "../../components/auth-form";
 import { useLoginController } from "./use-login-controller";
 
-export function Login() {
+export default function Login() {
   const { handleSubmit, register, errors, isPending } = useLoginController();
   return (
     <AuthForm

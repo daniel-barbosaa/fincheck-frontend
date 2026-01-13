@@ -1,18 +1,31 @@
+import { cn } from "../../../../../app/utils/class-name-merge";
 import { formatCurrency } from "../../../../../app/utils/formatters/format-currency";
-import { Card } from "../../../../components/card";
+import { Card } from "../../../../components/ui/card";
 import { BankAccountTypeIcon } from "../../../../components/icons/bank-account-type-icon";
+import type { Accountype } from "../../../../../app/types/account";
 
 interface AccountCardProps {
   name: string;
   currencyValue: number;
-  type: "cash" | "checking" | "investment";
+  type: Accountype;
+  color: string;
+  valueVisible: boolean;
+  onOpen(): void;
 }
 
-export function AccountCard({ currencyValue, name, type }: AccountCardProps) {
+export function AccountCard({
+  currencyValue,
+  name,
+  type,
+  color,
+  valueVisible,
+  onOpen,
+}: AccountCardProps) {
   return (
     <Card
       className="flex h-50 flex-col justify-between border-b-4 border-amber-700 p-4"
-      style={{ borderColor: "#f4ff32" }}
+      style={{ borderColor: color }}
+      onClick={onOpen}
     >
       <div>
         <BankAccountTypeIcon type={type} />
@@ -21,7 +34,12 @@ export function AccountCard({ currencyValue, name, type }: AccountCardProps) {
         </span>
       </div>
       <div>
-        <span className="text-foreground/90 block font-medium tracking-tighter">
+        <span
+          className={cn(
+            "text-foreground/90 block font-medium tracking-tighter",
+            !valueVisible && "blur-sm",
+          )}
+        >
           {formatCurrency(currencyValue)}
         </span>
         <small className="text-foreground/60">Saldo atual</small>

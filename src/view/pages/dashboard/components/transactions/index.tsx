@@ -1,48 +1,156 @@
-import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { Card } from "../../../../components/card";
-import { TransactionsIcon } from "../../../../components/icons/transactions-icon";
+import { Card } from "../../../../components/ui/card";
 import { FilterIcon } from "../../../../components/icons/filter-icon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { MONTHS } from "../../../../../app/constants/months";
 
 import { TransactionSliderOption } from "./slider-option";
 import { TransactionSliderNavigation } from "./slider-navigation";
-
+import { formatCurrency } from "../../../../../app/utils/formatters/format-currency";
+import { CategoryIcon } from "../../../../components/icons/categories/category-icon";
+import { useTransactionsController } from "./use-transactions-controller";
+import { cn } from "../../../../../app/utils/class-name-merge";
+import { Spinner } from "../../../../components/ui/spinner";
+import emptyState from "../../../../../assets/empty-state.svg";
+import { TransactionTypeDropdown } from "./transaction-type-dropdown";
+import { FiltersModal } from "./filters-modal";
+import { formatDate } from "../../../../../app/utils/formatters/format-date";
+import { EditTransactionModal } from "./edit-transaction-modal ";
 export function Transactions() {
-  return (
-    <Card className="h-full w-full bg-gray-100 px-4 py-8 md:p-10">
-      <header>
-        <div className="flex items-center justify-between">
-          <button className="flex items-center gap-2">
-            <TransactionsIcon />
-            <span className="text-foreground/90 text-sm font-medium tracking-tighter">
-              Transações
-            </span>
-            <ChevronDownIcon className="text-foreground" />
-          </button>
-          <button>
-            <FilterIcon />
-          </button>
-        </div>
+  const {
+    valueVisible,
+    isLoading,
+    transactions,
+    isInitialLoading,
+    isFiltersModalOpen,
+    handleCloseFiltersModal,
+    handleOpenFiltersModal,
+    handleChangeFilters,
+    filters,
+    handleApplyFilters,
+    handleCloseEditModal,
+    handleOpenEditModal,
+    transactionBeingEdited,
+    isEditModalOpen,
+  } = useTransactionsController();
+  const hasTransactions = transactions.length > 0;
 
-        <div className="relative mt-6">
-          <Swiper slidesPerView={3} centeredSlides>
-            {MONTHS.map((month, index) => (
-              <SwiperSlide key={month}>
-                {({ isActive }) => (
-                  <TransactionSliderOption
-                    index={index}
-                    isActive={isActive}
-                    month={month}
+  return (
+    <Card className="flex h-full w-full flex-col bg-gray-100 px-4 py-8 md:p-10">
+      {isInitialLoading && (
+        <div className="flex h-full items-center justify-center">
+          <Spinner clasName="size-10" />
+        </div>
+      )}
+      {!isInitialLoading && (
+        <>
+          <FiltersModal
+            open={isFiltersModalOpen}
+            onOpenChange={handleCloseFiltersModal}
+            onApplyFilters={handleApplyFilters}
+          />
+          <header>
+            <div className="flex items-center justify-between">
+              <TransactionTypeDropdown
+                onSelect={handleChangeFilters("type")}
+                selectedType={filters.type}
+              />
+              <button onClick={handleOpenFiltersModal}>
+                <FilterIcon />
+              </button>
+            </div>
+
+            <div className="relative mt-6">
+              <Swiper
+                slidesPerView={3}
+                centeredSlides
+                onSlideChange={(swiper) => {
+                  handleChangeFilters("month")(swiper.realIndex);
+                }}
+                initialSlide={filters.month}
+              >
+                {MONTHS.map((month, index) => (
+                  <SwiperSlide key={month}>
+                    {({ isActive }) => (
+                      <TransactionSliderOption
+                        index={index}
+                        isActive={isActive}
+                        month={month}
+                      />
+                    )}
+                  </SwiperSlide>
+                ))}
+                <TransactionSliderNavigation />
+              </Swiper>
+            </div>
+          </header>
+
+          <div className="mt-4 flex-1 space-y-2 overflow-y-auto">
+            {isLoading && (
+              <div className="flex h-full flex-col items-center justify-center">
+                <Spinner />
+              </div>
+            )}
+
+            {!hasTransactions && !isLoading && (
+              <div className="flex h-full flex-col items-center justify-center">
+                <img src={emptyState} alt="Empty state" />
+                <p className="text-foreground/80">
+                  Não encontramos nenhuma transação!
+                </p>
+              </div>
+            )}
+
+            {hasTransactions && !isLoading && (
+              <>
+                {transactionBeingEdited && (
+                  <EditTransactionModal
+                    transaction={transactionBeingEdited}
+                    open={isEditModalOpen}
+                    onClose={handleCloseEditModal}
                   />
                 )}
-              </SwiperSlide>
-            ))}
-            <TransactionSliderNavigation />
-          </Swiper>
-        </div>
-      </header>
-      <div className="mt-4">Conteudo</div>
+                {transactions.map((transaction) => (
+                  <Card
+                    className="flex cursor-pointer items-center justify-between gap-4 p-4"
+                    key={transaction.id}
+                    role="button"
+                    onClick={() => handleOpenEditModal(transaction)}
+                  >
+                    <div className="flex flex-1 items-center gap-3">
+                      <CategoryIcon
+                        type={
+                          transaction.type === "EXPENSE" ? "expense" : "income"
+                        }
+                        category={transaction.category?.icon}
+                      />
+                      <div>
+                        <strong className="block font-bold tracking-tighter capitalize">
+                          {transaction.name}
+                        </strong>
+                        <span className="text-foreground/60 text-sm">
+                          {formatDate(new Date(transaction.date))}
+                        </span>
+                      </div>
+                    </div>
+                    <span
+                      className={cn(
+                        "font-medium tracking-tighter",
+                        transaction.type === "EXPENSE"
+                          ? "text-red-800"
+                          : "text-green-800",
+                        !valueVisible && "blur-sm",
+                      )}
+                    >
+                      {transaction.type === "EXPENSE" ? "-" : "+"}
+                      {formatCurrency(transaction.value)}
+                    </span>
+                  </Card>
+                ))}
+              </>
+            )}
+          </div>
+        </>
+      )}
     </Card>
   );
 }
