@@ -20,8 +20,8 @@ export default defineConfig({
       org: "myprojects-ih",
       project: "fincheck",
       sourcemaps: {
-        filesToDeleteAfterUpload: ["**/*.map"]
-      }
+        filesToDeleteAfterUpload: ["**/*.map"],
+      },
     }),
   ],
   server: {
