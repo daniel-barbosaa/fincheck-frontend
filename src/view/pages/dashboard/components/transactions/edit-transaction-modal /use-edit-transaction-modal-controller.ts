@@ -55,7 +55,7 @@ export function useEditTransactionModalController(
       await mutateAsync({
         ...data,
         id: transaction!.id,
-        value: transaction!.value,
+        value: Number(data!.value),
         type: transaction!.type,
       });
       queryClient.invalidateQueries({
