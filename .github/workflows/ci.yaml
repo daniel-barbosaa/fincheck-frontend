@@ -1,16 +1,20 @@
 name: Linting Testes
 
-# Aqui indica quando deve executar, no caso quando houver (push ou PR) nessa lista de branches
 on:
   push:
     branches: [main, dev]
   pull_request:
     branches: [main]
-
-# O trabalho que deve ser executado
 jobs:
   ci:
     runs-on: ubuntu-latest
+    env:
+      VITE_API_URL: ${{ vars.VITE_API_URL }}
+      VITE_SENTRY_DSN: ${{ vars.VITE_SENTRY_DSN }}
+      VITE_CLARITY_ID: ${{ vars.VITE_CLARITY_ID }}
+
+      CI: true
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
     steps:
       - name: Checkout code
@@ -22,9 +26,11 @@ jobs:
           node-version: "20.x"
           cache: "yarn"
 
-      # Essas partes são para executar o que a gente quiser
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Validate envs
+        run: yarn validate:env
 
       - name: Prettier
         run: yarn lint:prettier:check
@@ -37,3 +43,6 @@ jobs:
 
       - name: Teste
         run: yarn test:ci
+
+      - name: Validate envs
+        run: yarn validate:env

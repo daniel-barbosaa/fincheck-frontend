@@ -22,6 +22,7 @@ export default defineConfig({
       sourcemaps: {
         filesToDeleteAfterUpload: ["**/*.map"],
       },
+      authToken: process.env.SENTRY_AUTH_TOKEN,
     }),
   ],
   server: {
