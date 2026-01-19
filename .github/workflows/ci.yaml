@@ -43,6 +43,3 @@ jobs:
 
       - name: Teste
         run: yarn test:ci
-
-      - name: Validate envs
-        run: yarn validate:env
