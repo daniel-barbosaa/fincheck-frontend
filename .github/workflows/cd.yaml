@@ -5,14 +5,11 @@ on:
     branches:
       - main
 jobs:
-  deploy:
+  build:
     name: Deploy to Vercel
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
         with:
