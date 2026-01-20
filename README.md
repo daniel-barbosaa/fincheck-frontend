@@ -19,7 +19,7 @@ A aplicação permite gerenciar contas bancárias, registrar despesas e receitas
 acompanhar investimentos e planejar financeiramente de forma simples,
 com foco em performance e boa experiência do usuário.
 
-🔗 **Acesse a aplicação em produção:** 
+🔗 **Acesse a aplicação em produção:**
 
 [![Fincheck](https://img.shields.io/badge/Fincheck-Production-087F5B?style=for-the-badge)](https://fincheck-service.vercel.app)
 
@@ -52,6 +52,7 @@ com foco em performance e boa experiência do usuário.
 ## Como rodar o projeto
 
 ### Pré-requisitos
+
 - Node.js 20+
 - Yarn ou npm
 
@@ -64,6 +65,7 @@ git clone https://github.com/daniel-barbosaa/fincheck-frontend
 # Acesse a pasta
 cd fincheck-frontend
 ```
+
 ### Variáveis de ambiente
 
 Este projeto consome uma API já publicada em produção,  
@@ -74,9 +76,11 @@ Crie um arquivo `.env` na raiz do projeto com a seguinte variável:
 ```env
 VITE_API_URL=https://fincheckapi-1.onrender.com
 ```
+
 > ⚠️ A URL acima aponta para a API oficial do projeto, hospedada em produção.
 
 #### Backend
+
 > O backend do Fincheck é uma aplicação separada.
 
 No momento, o repositório não está público.
@@ -116,3 +120,4 @@ src/
    ├─ layouts/     # Layouts da aplicação
    └─ pages/       # Páginas da aplicação
 
+```
